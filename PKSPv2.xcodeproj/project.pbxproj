@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		702F0E631482AFED008B1171 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 702F0E621482AFED008B1171 /* README */; };
 		703AEF3114815C00003FE12E /* Elements.m in Sources */ = {isa = PBXBuildFile; fileRef = 703AEF3014815C00003FE12E /* Elements.m */; };
 		703AEF3814815C3A003FE12E /* Nodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 703AEF3714815C39003FE12E /* Nodes.m */; };
 		703AEF3C14815DF0003FE12E /* Tmp.m in Sources */ = {isa = PBXBuildFile; fileRef = 703AEF3A14815DF0003FE12E /* Tmp.m */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		702F0E621482AFED008B1171 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		703AEF2F14815C00003FE12E /* Elements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Elements.h; sourceTree = "<group>"; };
 		703AEF3014815C00003FE12E /* Elements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Elements.m; sourceTree = "<group>"; };
 		703AEF3614815C39003FE12E /* Nodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nodes.h; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		70D471C5148157EA00DB9A77 = {
 			isa = PBXGroup;
 			children = (
+				702F0E621482AFED008B1171 /* README */,
 				70D471DA148157EA00DB9A77 /* PKSPv2 */,
 				70D471FA148157EC00DB9A77 /* PKSPv2Tests */,
 				70D471D3148157EA00DB9A77 /* Frameworks */,
@@ -339,6 +342,7 @@
 				70D471E5148157EA00DB9A77 /* Credits.rtf in Resources */,
 				70D471EB148157EB00DB9A77 /* MainMenu.xib in Resources */,
 				703AEF3D14815DF0003FE12E /* Tmp.xib in Resources */,
+				702F0E631482AFED008B1171 /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
