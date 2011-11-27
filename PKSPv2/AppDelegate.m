@@ -190,4 +190,9 @@
     return NSTerminateNow;
 }
 
+- (BOOL) applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender{
+    return YES;
+}
+
+
 @end
