@@ -190,7 +190,7 @@
                 //TODO: error hendeling
                 DLog(@"error %@\n", error);
             }
-            DLog(@"usunieto %i\n",number);
+//            DLog(@"usunieto %i\n",number);
         }
     }
     

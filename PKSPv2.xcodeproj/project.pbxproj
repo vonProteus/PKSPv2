@@ -17,6 +17,7 @@
 		705438ED14817DD0008C006E /* GlobalMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 705438EC14817DD0008C006E /* GlobalMatrix.m */; };
 		705438F414818179008C006E /* Nodes+Metods.m in Sources */ = {isa = PBXBuildFile; fileRef = 705438F314818179008C006E /* Nodes+Metods.m */; };
 		705438F7148181B3008C006E /* Elements+Metods.m in Sources */ = {isa = PBXBuildFile; fileRef = 705438F6148181B3008C006E /* Elements+Metods.m */; };
+		7089CE6A1483DAAC00124149 /* VTGauss.m in Sources */ = {isa = PBXBuildFile; fileRef = 7089CE691483DAAC00124149 /* VTGauss.m */; };
 		70D471D5148157EA00DB9A77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D471D4148157EA00DB9A77 /* Cocoa.framework */; };
 		70D471DF148157EA00DB9A77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70D471DD148157EA00DB9A77 /* InfoPlist.strings */; };
 		70D471E1148157EA00DB9A77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D471E0148157EA00DB9A77 /* main.m */; };
@@ -61,6 +62,8 @@
 		705438F314818179008C006E /* Nodes+Metods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Nodes+Metods.m"; sourceTree = "<group>"; };
 		705438F5148181B3008C006E /* Elements+Metods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Elements+Metods.h"; sourceTree = "<group>"; };
 		705438F6148181B3008C006E /* Elements+Metods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Elements+Metods.m"; sourceTree = "<group>"; };
+		7089CE681483DAAC00124149 /* VTGauss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTGauss.h; sourceTree = "<group>"; };
+		7089CE691483DAAC00124149 /* VTGauss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTGauss.m; sourceTree = "<group>"; };
 		70D471D0148157EA00DB9A77 /* PKSPv2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PKSPv2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D471D4148157EA00DB9A77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		70D471D7148157EA00DB9A77 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -262,6 +265,8 @@
 		70D47213148158F600DB9A77 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7089CE681483DAAC00124149 /* VTGauss.h */,
+				7089CE691483DAAC00124149 /* VTGauss.m */,
 				70D472141481590800DB9A77 /* NSFileManager+DirectoryLocations.h */,
 				70D472151481590800DB9A77 /* NSFileManager+DirectoryLocations.m */,
 			);
@@ -390,6 +395,7 @@
 				705438ED14817DD0008C006E /* GlobalMatrix.m in Sources */,
 				705438F414818179008C006E /* Nodes+Metods.m in Sources */,
 				705438F7148181B3008C006E /* Elements+Metods.m in Sources */,
+				7089CE6A1483DAAC00124149 /* VTGauss.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

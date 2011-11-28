@@ -68,9 +68,9 @@
     [coreData saveCD];
     
     DLog(@"number of nodes %ld \n", [[coreData allNodes] count]);
-    for (n in [coreData allNodes]) {
-        [n dlog];
-    }
+//    for (n in [coreData allNodes]) {
+//        [n dlog];
+//    }
     
     [coreData makeElementFromNode1:[coreData getNodeWithNumber: 1]
                              Node2:[coreData getNodeWithNumber: 4] 
@@ -94,10 +94,10 @@
     }
 
     
-    for (e in [coreData allElements]) {
-        [e dlog];
-    }
-    //    DLog(@"----------------");
+//    for (e in [coreData allElements]) {
+//        [e dlog];
+//    }
+//    DLog(@"----------------");
 //    
 //    [coreData removeNodeByNumber:5];
 //    
@@ -111,9 +111,25 @@
     
     GlobalMatrix* gm = [[GlobalMatrix alloc] init];
     
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"==============\n"];
+        DLog(@"%@",stringTMP);
+    }
+
+    
     [gm fillGlobalMatrix];
-        
+    
+//    [gm add:2 ToX:3 AndY:3]; 
+    
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"==============\n"];
+        DLog(@"%@",stringTMP);
+    }
+
     [gm dlog2];
+//    [gm dlog];
+    
+    
    
     DLog(@"end");
 }

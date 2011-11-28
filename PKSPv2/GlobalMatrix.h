@@ -12,6 +12,7 @@
 
 @interface GlobalMatrix : NSObject {
     NSMutableArray* H;
+//    double** H2;
     NSMutableDictionary* HXNames;
     NSMutableDictionary* HYNames;
     CDModel* coreData;
@@ -44,6 +45,11 @@
 //
 - (void) dlog;
 - (void) dlog2;
+
+- (void) addByNumberOfNodeValue:(double)Value 
+                        ToNode1:(NSUInteger)X 
+                       AndNode2:(NSUInteger)Y;
+
 
 
 
