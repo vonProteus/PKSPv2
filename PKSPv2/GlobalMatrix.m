@@ -35,6 +35,11 @@
             [[H objectAtIndex:a] addObject:[[NSNumber alloc] initWithDouble:0.0]];
         }
     }
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"HYNames = %@ \n HXNames = %@\n", HYNames, HXNames];
+        DLog(@"%@",stringTMP);
+    }
+
     return self;
 }
 
@@ -157,9 +162,9 @@
 }
 
 -(void) dlog2{
-    for (int y = 0; y < [H count]-1; ++y) {
+    for (int y = 0; y < [H count]; ++y) {
         NSMutableArray* line = [H objectAtIndex:y];
-        for (int x = 0; x < [line count]-1; ++x) {
+        for (int x = 0; x < [line count]; ++x) {
             {
                 double doubleTMP = [[line objectAtIndex:x] doubleValue]; 
                 NSString* stringTMP = [NSString stringWithFormat:@"[%i,%i] %f\n",x,y, doubleTMP];
@@ -181,7 +186,57 @@
                        ToNode1:(NSUInteger)X 
                       AndNode2:(NSUInteger)Y{
     
+    NSString *stringY = [[NSNumber numberWithUnsignedInteger:Y] stringValue];
+    NSInteger lineName = [[HYNames objectForKey:stringY] integerValue];
+    
+    NSString *stringX = [[NSNumber numberWithUnsignedInteger:Y] stringValue];
+    NSInteger columnName = [[HXNames objectForKey:stringX] integerValue];
+    
+    double newValue = [self getValueFromRealX:columnName 
+                                     AndRealY:lineName];
+    newValue += Value;
+    
+    [self setValue:newValue 
+           ToRealX:columnName 
+          AndRealY:lineName];
+    
+    
+
+    
 }
+
+
+- (double) getValueFromRealX:(NSUInteger)X 
+                    AndRealY:(NSUInteger)Y{
+    double r = 0;
+       
+    r = [[[H objectAtIndex:Y] objectAtIndex:X] doubleValue];
+    //    {
+    //        NSString* stringTMP = [NSString stringWithFormat:@"[%i,%i] r = %f\n",X,Y,r];
+    //        DLog(@"%@",stringTMP);
+    //    }
+    
+    //    r = H2[Y][X];
+    
+    return r;
+}
+
+- (void) setValue:(double)Value 
+          ToRealX:(NSUInteger)X 
+         AndRealY:(NSUInteger)Y{
+    
+    NSNumber *numberValue = [NSNumber numberWithDouble:Value];
+    
+    [(NSMutableArray*)[H objectAtIndex:Y] replaceObjectAtIndex:X withObject:numberValue];
+    
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"X = %ld Y = %ld Value = %f\n", X, Y, Value];
+        DLog(@"%@",stringTMP);
+    }
+
+    
+}
+
 
 
 @end

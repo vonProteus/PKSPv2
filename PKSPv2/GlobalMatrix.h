@@ -50,6 +50,12 @@
                         ToNode1:(NSUInteger)X 
                        AndNode2:(NSUInteger)Y;
 
+- (double) getValueFromRealX:(NSUInteger)X 
+                    AndRealY:(NSUInteger)Y;
+
+- (void) setValue:(double)Value 
+          ToRealX:(NSUInteger)X 
+         AndRealY:(NSUInteger)Y;
 
 
 

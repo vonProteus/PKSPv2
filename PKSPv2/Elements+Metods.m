@@ -49,39 +49,41 @@
     double h32 = h*((p1.y-p2.y)*(p3.y-p1.y)+(p2.x-p1.x)*(p1.x-p3.x));
     double h33 = h*((p1.y-p2.y)*(p1.y-p2.y)+(p2.x-p1.x)*(p2.x-p1.x));
     
-    {
-        NSString* stringTMP = [NSString stringWithFormat:@"%f %f %f %f %f %f %f %f %f\n", h11, h12, h13, h21, h22, h23, h31, h32, h33];
-        DLog(@"%@",stringTMP);
-    }
+//    {
+//        NSString* stringTMP = [NSString stringWithFormat:@"%f %f %f %f %f %f %f %f %f\n", h11, h12, h13, h21, h22, h23, h31, h32, h33];
+//        DLog(@"%@",stringTMP);
+//    }
+
 
     
-    [ThisMatrix add:h11 
-                ToX:[self.n1.number unsignedIntegerValue] 
-               AndY:[self.n1.number unsignedIntegerValue]];
-    [ThisMatrix add:h12 
-                ToX:[self.n1.number unsignedIntegerValue] 
-               AndY:[self.n2.number unsignedIntegerValue]];
-    [ThisMatrix add:h13 
-                ToX:[self.n1.number unsignedIntegerValue] 
-               AndY:[self.n3.number unsignedIntegerValue]];
-    [ThisMatrix add:h21 
-                ToX:[self.n2.number unsignedIntegerValue] 
-               AndY:[self.n1.number unsignedIntegerValue]];
-    [ThisMatrix add:h22 
-                ToX:[self.n2.number unsignedIntegerValue] 
-               AndY:[self.n2.number unsignedIntegerValue]];
-    [ThisMatrix add:h23 
-                ToX:[self.n2.number unsignedIntegerValue] 
-               AndY:[self.n3.number unsignedIntegerValue]];
-    [ThisMatrix add:h31 
-                ToX:[self.n3.number unsignedIntegerValue] 
-               AndY:[self.n1.number unsignedIntegerValue]];
-    [ThisMatrix add:h32 
-                ToX:[self.n3.number unsignedIntegerValue] 
-               AndY:[self.n2.number unsignedIntegerValue]];
-    [ThisMatrix add:h33 
-                ToX:[self.n3.number unsignedIntegerValue] 
-               AndY:[self.n3.number unsignedIntegerValue]];
+    
+    [ThisMatrix addByNumberOfNodeValue:h11 
+                               ToNode1:[self.n1.number unsignedIntegerValue] 
+                              AndNode2:[self.n1.number unsignedIntegerValue]];
+    [ThisMatrix addByNumberOfNodeValue:h12 
+                               ToNode1:[self.n1.number unsignedIntegerValue] 
+                              AndNode2:[self.n2.number unsignedIntegerValue]];
+    [ThisMatrix addByNumberOfNodeValue:h13 
+                               ToNode1:[self.n1.number unsignedIntegerValue] 
+                              AndNode2:[self.n3.number unsignedIntegerValue]];
+    [ThisMatrix addByNumberOfNodeValue:h21 
+                               ToNode1:[self.n2.number unsignedIntegerValue] 
+                              AndNode2:[self.n1.number unsignedIntegerValue]];
+    [ThisMatrix addByNumberOfNodeValue:h22 
+                               ToNode1:[self.n2.number unsignedIntegerValue] 
+                              AndNode2:[self.n2.number unsignedIntegerValue]];
+    [ThisMatrix addByNumberOfNodeValue:h23 
+                               ToNode1:[self.n2.number unsignedIntegerValue] 
+                              AndNode2:[self.n3.number unsignedIntegerValue]];
+    [ThisMatrix addByNumberOfNodeValue:h31 
+                               ToNode1:[self.n3.number unsignedIntegerValue] 
+                              AndNode2:[self.n1.number unsignedIntegerValue]];
+    [ThisMatrix addByNumberOfNodeValue:h32 
+                               ToNode1:[self.n3.number unsignedIntegerValue] 
+                              AndNode2:[self.n2.number unsignedIntegerValue]];
+    [ThisMatrix addByNumberOfNodeValue:h33 
+                               ToNode1:[self.n3.number unsignedIntegerValue] 
+                              AndNode2:[self.n3.number unsignedIntegerValue]];
 }
 
 
