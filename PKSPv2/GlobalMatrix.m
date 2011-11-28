@@ -12,7 +12,7 @@
 
 -(id) init{
     coreData = [CDModel sharedModel];
-    H = [[NSMutableArray alloc] init];
+    NSMutableArray *HTmp = [[NSMutableArray alloc] init];
     HYNames = [[NSMutableDictionary alloc] init];
     HXNames = [[NSMutableDictionary alloc] init];
 
@@ -28,11 +28,11 @@
     
     
     for (int a = 0; a < [HYNames count]; ++a) {
-        [H addObject:[[NSMutableArray alloc] init]];
+        [HTmp addObject:[[NSMutableArray alloc] init]];
 //        H2[a] = (double *) NewPtr(i*sizeof(double));
         for (int b = 0; b < [HXNames count]; ++b) {
 //            H2[a][b] = 0;
-            [[H objectAtIndex:a] addObject:[[NSNumber alloc] initWithDouble:0.0]];
+            [[HTmp objectAtIndex:a] addObject:[[NSNumber alloc] initWithDouble:0.0]];
         }
     }
     {
@@ -40,6 +40,7 @@
         DLog(@"%@",stringTMP);
     }
 
+    H = [[NSArray alloc] initWithArray:HTmp copyItems:YES];
     return self;
 }
 
@@ -140,6 +141,7 @@
     for (Elements *e in [coreData allElements]) {
         [e addSelfToGlobal:self andK:8];
     }
+    
 }
 
 
@@ -227,13 +229,25 @@
     
     NSNumber *numberValue = [NSNumber numberWithDouble:Value];
     
-    [(NSMutableArray*)[H objectAtIndex:Y] replaceObjectAtIndex:X withObject:numberValue];
+    NSMutableArray *HMutable = [H mutableCopy];
+    NSMutableArray *lineMutable = [[H objectAtIndex:Y] mutableCopy];
     
-    {
-        NSString* stringTMP = [NSString stringWithFormat:@"X = %ld Y = %ld Value = %f\n", X, Y, Value];
-        DLog(@"%@",stringTMP);
-    }
+    [lineMutable replaceObjectAtIndex:X withObject:numberValue];
+    
+    [HMutable replaceObjectAtIndex:Y withObject:lineMutable];
+    
+    H;
+    
+    H = [[NSArray alloc] initWithArray:HMutable];
+    
+//    [(NSMutableArray*)[H objectAtIndex:Y] replaceObjectAtIndex:X withObject:numberValue];
+    
+//    {
+//        NSString* stringTMP = [NSString stringWithFormat:@"X = %ld Y = %ld Value = %f %f\n", X, Y, Value, [self getValueFromRealX:X AndRealY:Y]];
+//        DLog(@"%@",stringTMP);
+//    }
 
+    
     
 }
 

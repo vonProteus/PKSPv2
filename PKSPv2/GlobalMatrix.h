@@ -11,7 +11,7 @@
 
 
 @interface GlobalMatrix : NSObject {
-    NSMutableArray* H;
+    NSArray* H;
 //    double** H2;
     NSMutableDictionary* HXNames;
     NSMutableDictionary* HYNames;

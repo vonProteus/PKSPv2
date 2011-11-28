@@ -54,7 +54,8 @@
 //        DLog(@"%@",stringTMP);
 //    }
 
-
+    
+    [ThisMatrix dlog2];
     
     
     [ThisMatrix addByNumberOfNodeValue:h11 
@@ -84,6 +85,8 @@
     [ThisMatrix addByNumberOfNodeValue:h33 
                                ToNode1:[self.n3.number unsignedIntegerValue] 
                               AndNode2:[self.n3.number unsignedIntegerValue]];
+    
+    [ThisMatrix dlog2];
 }
 
 
