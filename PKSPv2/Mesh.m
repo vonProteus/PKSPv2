@@ -18,8 +18,8 @@
     n = [[coreData allNodes] count];
 	polygon = (NSPoint *) calloc(n, sizeof(NSPoint));
     self.numberOfPointsToAdd = 100;
-    self.nodeSizeX = 20;
-    self.nodeSizeY = 20;
+    self.nodeSizeX = 50;
+    self.nodeSizeY = 50;
     
     NSArray *sorted = [[coreData allNodes] sortedArrayUsingComparator:^(id obj1, id obj2){
         
@@ -62,8 +62,9 @@
     
     [self dlogPolygon];
     [self sizeMash];
+    [self bildElements];
     [coreData saveCD];
-       
+    
 }
 
 
@@ -141,6 +142,86 @@
         }
     }
 }
+
+
+-(void) bildElements{
+    Nodes* n2 = Nil;
+    Nodes* n3 = Nil;
+    for (Nodes* n1 in [coreData allNodes]) {
+        NSUInteger n1Number = [n1.number unsignedIntegerValue];
+        double dMin = DBL_MAX;
+        double dMin1 = dMin;
+        NSPoint p1 = [n1 pointValue];
+        for (Nodes* nTmp in [coreData allNodes]) {
+            NSUInteger nTmpNumber = [nTmp.number unsignedIntegerValue];
+            if (n1Number == nTmpNumber) {
+                continue;
+            }
+            NSPoint pTmp = [nTmp pointValue];
+            if (dMin > [self distanceFromP1:p1 toP2:pTmp]) {
+                dMin1 = dMin;
+                dMin = [self distanceFromP1:p1 toP2:pTmp];
+                n2 = n3;
+                n2 = nTmp;
+            }
+        }
+        
+        if (n3 == Nil) {
+            NSUInteger n2Number = [n2.number unsignedIntegerValue];
+            dMin1 = DBL_MAX;
+            for (Nodes* nTmp in [coreData allNodes]) {
+                NSUInteger nTmpNumber = [nTmp.number unsignedIntegerValue];
+                if (n1Number == nTmpNumber) {
+                    continue;
+                }
+                if (n2Number == nTmpNumber) {
+                    continue;
+                }
+                NSPoint pTmp = [nTmp pointValue];
+                if (dMin1 > [self distanceFromP1:p1 toP2:pTmp]) {
+                    dMin1 = [self distanceFromP1:p1 toP2:pTmp];
+                    n3 = nTmp;
+                }
+            }
+        }
+        
+        BOOL create = YES;
+        
+        for (Elements* eOfN1 in n1.inElements) {
+            NSMutableSet* nodesOfElement = [[NSMutableSet alloc] init];
+            [nodesOfElement addObject:n1];
+            [nodesOfElement addObject:n2];
+            [nodesOfElement addObject:n3];
+            [nodesOfElement addObject:eOfN1.n1];
+            [nodesOfElement addObject:eOfN1.n2];
+            [nodesOfElement addObject:eOfN1.n3];
+            {
+                NSString* stringTMP = [NSString stringWithFormat:@"%ld\n",[nodesOfElement count]];
+                DLog(@"%@",stringTMP);
+            }
+
+            if ([nodesOfElement count] == 3) {
+                create = NO;
+            }
+        }
+        if (create) {
+            
+            [[coreData makeElementFromNode1:n1
+                                      Node2:n2
+                                      Node3:n3] dlog];
+            [coreData saveCD];
+        }
+        
+    }
+    
+}
+
+-(double) distanceFromP1:(NSPoint)p1 
+                    toP2:(NSPoint)p2{
+    NSPoint delta = NSMakePoint(p2.x - p1.x, p2.y - p1.y);
+    return delta.x*delta.x + delta.y*delta.y;
+}
+
 
 
 @end

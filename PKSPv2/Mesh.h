@@ -27,4 +27,7 @@
 -(void) bildElements;
 
 
+-(double) distanceFromP1:(NSPoint)p1 
+                    toP2:(NSPoint)p2;
+
 @end

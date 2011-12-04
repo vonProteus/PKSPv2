@@ -89,7 +89,7 @@
     
     switch (self.mode) {
         default:
-            rgba = [NSColor blackColor];
+            rgba = [NSColor greenColor];
             break;
     }
     
@@ -102,7 +102,6 @@
 
 -(void) drawElement:(Elements *)elem WithColor:(NSColor *)rgba{
     NSBezierPath* path = [NSBezierPath bezierPath];
-    [rgba set];
     NSPoint p1,p2,p3;
     switch (self.mode) {
         default:
@@ -124,9 +123,15 @@
     //3-1
     [path lineToPoint:p1];
     
-    
-    
+    [rgba set];
     [path stroke];
+    [[NSColor colorWithDeviceRed:(arc4random()%255)/255.0 
+                           green:(arc4random()%255)/255.0  
+                            blue:(arc4random()%255)/255.0 
+                           alpha:0.2] setFill];
+    [path fill];
+
+    
     
 }
 
