@@ -21,6 +21,9 @@
     self.nodeSizeX = 50;
     self.nodeSizeY = 50;
     
+    
+    
+    
     NSArray *sorted = [[coreData allNodes] sortedArrayUsingComparator:^(id obj1, id obj2){
         
         if ([obj1 isKindOfClass:[Nodes class]] && [obj2 isKindOfClass:[Nodes class]]) {
@@ -145,81 +148,83 @@
 
 
 -(void) bildElements{
+    Nodes* n1 = Nil;
     Nodes* n2 = Nil;
     Nodes* n3 = Nil;
-    for (Nodes* n1 in [coreData allNodes]) {
-        NSUInteger n1Number = [n1.number unsignedIntegerValue];
-        double dMin = DBL_MAX;
-        double dMin1 = dMin;
+    
+   
+    
+    NSArray* allNodes = [coreData allNodes];
+    
+    for (NSUInteger node1 = 0; node1 < [allNodes count]; ++node1) {
+        n1 = [allNodes objectAtIndex:node1];
         NSPoint p1 = [n1 pointValue];
-        for (Nodes* nTmp in [coreData allNodes]) {
-            NSUInteger nTmpNumber = [nTmp.number unsignedIntegerValue];
-            if (n1Number == nTmpNumber) {
+
+        double d2 = DBL_MAX;
+        double d3 = DBL_MAX;
+        
+        for (NSUInteger node2 = 0; node2 < [allNodes count]; ++node2) {
+            if (node1 == node2) {
                 continue;
             }
+            Nodes* nTmp = [allNodes objectAtIndex:node2];
             NSPoint pTmp = [nTmp pointValue];
-            if (dMin > [self distanceFromP1:p1 toP2:pTmp]) {
-                dMin1 = dMin;
-                dMin = [self distanceFromP1:p1 toP2:pTmp];
-                n2 = n3;
+            
+            double dTmp = [self distanceFromP1:p1 toP2:pTmp];
+            if (d2 > dTmp) {
+                d3 = d2;
+                d2 = dTmp;
+                n3 = n2;
                 n2 = nTmp;
+                
+
             }
         }
         
         if (n3 == Nil) {
             NSUInteger n2Number = [n2.number unsignedIntegerValue];
-            dMin1 = DBL_MAX;
-            for (Nodes* nTmp in [coreData allNodes]) {
-                NSUInteger nTmpNumber = [nTmp.number unsignedIntegerValue];
-                if (n1Number == nTmpNumber) {
+            
+            for (NSUInteger node3 = 0; node3 < [allNodes count]; ++node3) {
+                if (node1 == node3) {
                     continue;
                 }
+                Nodes* nTmp = [allNodes objectAtIndex:node3];
+                NSUInteger nTmpNumber = [nTmp.number unsignedIntegerValue];
                 if (n2Number == nTmpNumber) {
                     continue;
                 }
                 NSPoint pTmp = [nTmp pointValue];
-                if (dMin1 > [self distanceFromP1:p1 toP2:pTmp]) {
-                    dMin1 = [self distanceFromP1:p1 toP2:pTmp];
+                
+                double dTmp = [self distanceFromP1:p1 toP2:pTmp];
+                if (d3 > dTmp) {
+                    d3 = dTmp;
                     n3 = nTmp;
                 }
             }
-        }
-        
-        BOOL create = YES;
-        
-        for (Elements* eOfN1 in n1.inElements) {
-            NSMutableSet* nodesOfElement = [[NSMutableSet alloc] init];
-            [nodesOfElement addObject:n1];
-            [nodesOfElement addObject:n2];
-            [nodesOfElement addObject:n3];
-            [nodesOfElement addObject:eOfN1.n1];
-            [nodesOfElement addObject:eOfN1.n2];
-            [nodesOfElement addObject:eOfN1.n3];
-            {
-                NSString* stringTMP = [NSString stringWithFormat:@"%ld\n",[nodesOfElement count]];
-                DLog(@"%@",stringTMP);
-            }
 
-            if ([nodesOfElement count] == 3) {
-                create = NO;
-            }
         }
-        if (create) {
-            
-            [[coreData makeElementFromNode1:n1
-                                      Node2:n2
-                                      Node3:n3] dlog];
-            [coreData saveCD];
+        
+        
+        {
+            NSString* stringTMP = [NSString stringWithFormat:@"%ld %f %ld %f %ld\n",[n1.number unsignedIntegerValue], d2,[n2.number unsignedIntegerValue], d3, [n3.number unsignedIntegerValue]];
+            DLog(@"%@",stringTMP);
         }
+        
+//        [n1 dlog];
+//        [n2 dlog];
+//        [n3 dlog];
+        [coreData makeElementFromNode1:n1 
+                                 Node2:n2
+                                 Node3:n3];
+        
         
     }
-    
 }
 
 -(double) distanceFromP1:(NSPoint)p1 
                     toP2:(NSPoint)p2{
     NSPoint delta = NSMakePoint(p2.x - p1.x, p2.y - p1.y);
-    return delta.x*delta.x + delta.y*delta.y;
+    return ((delta.x*delta.x) + (delta.y*delta.y));
 }
 
 
