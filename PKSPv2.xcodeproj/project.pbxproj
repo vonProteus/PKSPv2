@@ -17,7 +17,8 @@
 		705438ED14817DD0008C006E /* GlobalMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 705438EC14817DD0008C006E /* GlobalMatrix.m */; };
 		705438F414818179008C006E /* Nodes+Metods.m in Sources */ = {isa = PBXBuildFile; fileRef = 705438F314818179008C006E /* Nodes+Metods.m */; };
 		705438F7148181B3008C006E /* Elements+Metods.m in Sources */ = {isa = PBXBuildFile; fileRef = 705438F6148181B3008C006E /* Elements+Metods.m */; };
-		7089CE6A1483DAAC00124149 /* VTGauss.m in Sources */ = {isa = PBXBuildFile; fileRef = 7089CE691483DAAC00124149 /* VTGauss.m */; };
+		70B12EB1148BCA5400DBA209 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B12EB0148BCA5400DBA209 /* MainView.m */; };
+		70B12EB6148BCB4A00DBA209 /* MenuBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B12EB5148BCB4A00DBA209 /* MenuBarController.m */; };
 		70D471D5148157EA00DB9A77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D471D4148157EA00DB9A77 /* Cocoa.framework */; };
 		70D471DF148157EA00DB9A77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70D471DD148157EA00DB9A77 /* InfoPlist.strings */; };
 		70D471E1148157EA00DB9A77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D471E0148157EA00DB9A77 /* main.m */; };
@@ -62,8 +63,10 @@
 		705438F314818179008C006E /* Nodes+Metods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Nodes+Metods.m"; sourceTree = "<group>"; };
 		705438F5148181B3008C006E /* Elements+Metods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Elements+Metods.h"; sourceTree = "<group>"; };
 		705438F6148181B3008C006E /* Elements+Metods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Elements+Metods.m"; sourceTree = "<group>"; };
-		7089CE681483DAAC00124149 /* VTGauss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VTGauss.h; sourceTree = "<group>"; };
-		7089CE691483DAAC00124149 /* VTGauss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VTGauss.m; sourceTree = "<group>"; };
+		70B12EAF148BCA5400DBA209 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
+		70B12EB0148BCA5400DBA209 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
+		70B12EB4148BCB4A00DBA209 /* MenuBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuBarController.h; sourceTree = "<group>"; };
+		70B12EB5148BCB4A00DBA209 /* MenuBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuBarController.m; sourceTree = "<group>"; };
 		70D471D0148157EA00DB9A77 /* PKSPv2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PKSPv2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D471D4148157EA00DB9A77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		70D471D7148157EA00DB9A77 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -114,6 +117,7 @@
 		703AEF3E14815E03003FE12E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				70B12EAD148BC9F200DBA209 /* MainView */,
 				703AEF4014815F68003FE12E /* TmpV */,
 				703AEF3F14815E0F003FE12E /* Tmp */,
 			);
@@ -161,6 +165,32 @@
 			name = basic;
 			sourceTree = "<group>";
 		};
+		70B12EAD148BC9F200DBA209 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				70B12EAF148BCA5400DBA209 /* MainView.h */,
+				70B12EB0148BCA5400DBA209 /* MainView.m */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
+		70B12EB2148BCA9000DBA209 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				70D4720F148158A800DB9A77 /* CoreData */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		70B12EB3148BCAD900DBA209 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				70B12EB4148BCB4A00DBA209 /* MenuBarController.h */,
+				70B12EB5148BCB4A00DBA209 /* MenuBarController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		70D471C5148157EA00DB9A77 = {
 			isa = PBXGroup;
 			children = (
@@ -204,10 +234,11 @@
 		70D471DA148157EA00DB9A77 /* PKSPv2 */ = {
 			isa = PBXGroup;
 			children = (
-				705438E614817D6C008C006E /* Logic */,
+				70B12EB3148BCAD900DBA209 /* Controller */,
+				70B12EB2148BCA9000DBA209 /* Model */,
 				703AEF3E14815E03003FE12E /* Views */,
+				705438E614817D6C008C006E /* Logic */,
 				70D47213148158F600DB9A77 /* Helpers */,
-				70D4720F148158A800DB9A77 /* CoreData */,
 				70D471E6148157EA00DB9A77 /* AppDelegate.h */,
 				70D471E7148157EA00DB9A77 /* AppDelegate.m */,
 				70D471E9148157EB00DB9A77 /* MainMenu.xib */,
@@ -265,8 +296,6 @@
 		70D47213148158F600DB9A77 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				7089CE681483DAAC00124149 /* VTGauss.h */,
-				7089CE691483DAAC00124149 /* VTGauss.m */,
 				70D472141481590800DB9A77 /* NSFileManager+DirectoryLocations.h */,
 				70D472151481590800DB9A77 /* NSFileManager+DirectoryLocations.m */,
 			);
@@ -395,7 +424,8 @@
 				705438ED14817DD0008C006E /* GlobalMatrix.m in Sources */,
 				705438F414818179008C006E /* Nodes+Metods.m in Sources */,
 				705438F7148181B3008C006E /* Elements+Metods.m in Sources */,
-				7089CE6A1483DAAC00124149 /* VTGauss.m in Sources */,
+				70B12EB1148BCA5400DBA209 /* MainView.m in Sources */,
+				70B12EB6148BCB4A00DBA209 /* MenuBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,134 +7,40 @@
 //
 
 #import "GlobalMatrix.h"
+#import "VTGauss.h"
+
 
 @implementation GlobalMatrix
 
 -(id) init{
     coreData = [CDModel sharedModel];
-    NSMutableArray *HTmp = [[NSMutableArray alloc] init];
+    H = [[NSMutableArray alloc] init];
     HYNames = [[NSMutableDictionary alloc] init];
     HXNames = [[NSMutableDictionary alloc] init];
+    HXNamesRevers = [[NSMutableDictionary alloc] init];
 
     NSInteger i = 0;
     for (Nodes* n in [coreData allNodes]) {
         [HYNames setValue:[NSNumber numberWithInteger:i] forKey:[n.number stringValue]];
         [HXNames setValue:[NSNumber numberWithInteger:i] forKey:[n.number stringValue]];
+        [HXNamesRevers setValue:[n.number copy] forKey:[[NSNumber numberWithInteger:i] stringValue]];
         ++i;
     }
     
-//    H2 = (double **) NewPtr(i*sizeof(double*));
-
     
     
     for (int a = 0; a < [HYNames count]; ++a) {
-        [HTmp addObject:[[NSMutableArray alloc] init]];
-//        H2[a] = (double *) NewPtr(i*sizeof(double));
+        [H addObject:[[NSMutableArray alloc] init]];
         for (int b = 0; b < [HXNames count]; ++b) {
-//            H2[a][b] = 0;
-            [[HTmp objectAtIndex:a] addObject:[[NSNumber alloc] initWithDouble:0.0]];
+            [[H objectAtIndex:a] addObject:[[NSNumber alloc] initWithDouble:0.0]];
         }
     }
-    {
-        NSString* stringTMP = [NSString stringWithFormat:@"HYNames = %@ \n HXNames = %@\n", HYNames, HXNames];
-        DLog(@"%@",stringTMP);
-    }
+    
 
-    H = [[NSArray alloc] initWithArray:HTmp copyItems:YES];
     return self;
 }
 
 
-- (void) add:(double)Value 
-         ToX:(NSUInteger)X 
-        AndY:(NSUInteger)Y{
-    
-    double prevValue = [self getValueFromX:X 
-                                      AndY:Y];
-    double setThisValue = Value + prevValue;
-    [self set:setThisValue
-          ToX:X 
-         AndY:Y];
-    double nowIsValue = [self getValueFromX:X 
-                                       AndY:Y];
-    if (nowIsValue != setThisValue) {
-        {
-            NSString* stringTMP = [NSString stringWithFormat:@"dupa\n"];
-            DLog(@"%@",stringTMP);
-        }
-
-    }
-
-}
-
-- (double) getValueFromX:(NSUInteger)X 
-                    AndY:(NSUInteger)Y{
-    double r = 0;
-    NSString *stringY = [[NSNumber numberWithUnsignedInteger:Y] stringValue];
-    NSInteger lineName = [[HYNames objectForKey:stringY] integerValue];
-    
-    NSString *stringX = [[NSNumber numberWithUnsignedInteger:Y] stringValue];
-    NSInteger columnName = [[HXNames objectForKey:stringX] integerValue];
-    
-    r = [[[H objectAtIndex:lineName] objectAtIndex:columnName] doubleValue];
-//    {
-//        NSString* stringTMP = [NSString stringWithFormat:@"[%i,%i] r = %f\n",X,Y,r];
-//        DLog(@"%@",stringTMP);
-//    }
-
-//    r = H2[Y][X];
-        
-    return r;
-}
-
-- (void) set:(double)Value 
-         ToX:(NSUInteger)X 
-        AndY:(NSUInteger)Y{
-    NSString *stringY = [[NSNumber numberWithUnsignedInteger:Y] stringValue];
-    NSInteger lineName = [[HYNames objectForKey:stringY] integerValue];
-    
-    NSString *stringX = [[NSNumber numberWithUnsignedInteger:Y] stringValue];
-    NSInteger columnName = [[HXNames objectForKey:stringX] integerValue];
-    
-    {
-        NSString* stringTMP = [NSString stringWithFormat:@"%f\n",Value];
-        DLog(@"%@",stringTMP);
-    }
-
-    
-    NSNumber* numberValue = [[NSNumber alloc ] initWithDouble:Value];
-    
-    NSMutableArray *line = [H objectAtIndex:lineName];
-    
-    
-    {
-        NSString* stringTMP = [NSString stringWithFormat:@"%@\n", line];
-        DLog(@"%@",stringTMP);
-    }
-
-    [line removeObjectAtIndex:columnName];
-    
-    [line insertObject:numberValue 
-               atIndex:columnName];
-    
-    {
-        NSString* stringTMP = [NSString stringWithFormat:@"%@\n", line];
-        DLog(@"%@",stringTMP);
-    }
-//    [[H objectAtIndex:lineName] replaceObjectAtIndex:columnName 
-//                                          withObject:numberValue];
-    if (Value != [self getValueFromX:X AndY:Y]) {
-        {
-            NSString* stringTMP = [NSString stringWithFormat:@"dupa1\n"];
-            DLog(@"%@",stringTMP);
-        }
-
-    }
-
-//    H2[Y][X] = Value;
-    
-    
-}
 
 
 - (void) fillGlobalMatrix{
@@ -150,12 +56,16 @@
 -(void) dlog{
     for (NSNumber* numberY in HYNames) {
         for (NSNumber* numberX in HXNames) {
+            NSUInteger realX = [self convertNodeNumberToRealX:[numberX integerValue]];
+            NSUInteger realY = [self convertNodeNumberToRealY:[numberY integerValue]];
+            
+            
             {
-                NSString* stringTMP = [NSString stringWithFormat:@"[%i,%i] %f\n", 
-                                       [numberX intValue], 
-                                       [numberY intValue], 
-                                       [self getValueFromX:[numberX integerValue] 
-                                                      AndY:[numberY integerValue]]];
+                NSString* stringTMP = [NSString stringWithFormat:@"[%ld,%ld] %f\n", 
+                                       [numberX integerValue], 
+                                       [numberY integerValue], 
+                                       [self getValueFromRealX:realX 
+                                                      AndRealY:realY]];
                 DLog(@"%@",stringTMP);
             }
         }
@@ -164,23 +74,35 @@
 }
 
 -(void) dlog2{
-    for (int y = 0; y < [H count]; ++y) {
+    
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"start======================\n"];
+        DLog(@"%@",stringTMP);
+    }
+
+    for (NSUInteger y = 0; y < [H count]; ++y) {
         NSMutableArray* line = [H objectAtIndex:y];
-        for (int x = 0; x < [line count]; ++x) {
+        for (NSUInteger x = 0; x < [line count]; ++x) {
             {
                 double doubleTMP = [[line objectAtIndex:x] doubleValue]; 
-                NSString* stringTMP = [NSString stringWithFormat:@"[%i,%i] %f\n",x,y, doubleTMP];
+                NSString* stringTMP = [NSString stringWithFormat:@"[%ld,%ld] %f\n",x,y, doubleTMP];
                 DLog(@"%@",stringTMP);
             }
             
-//            {
-//                NSString* stringTMP = [NSString stringWithFormat:@"%f\n", [[line objectAtIndex:x] doubleValue]];
-//                DLog(@"%@",stringTMP);
-//            }
-
-
         }
+        
+        {
+            NSString* stringTMP = [NSString stringWithFormat:@"-----\n"];
+            DLog(@"%@",stringTMP);
+        }
+
     }    
+    
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"end========================\n"];
+        DLog(@"%@",stringTMP);
+    }
+
 }
 
 
@@ -188,11 +110,9 @@
                        ToNode1:(NSUInteger)X 
                       AndNode2:(NSUInteger)Y{
     
-    NSString *stringY = [[NSNumber numberWithUnsignedInteger:Y] stringValue];
-    NSInteger lineName = [[HYNames objectForKey:stringY] integerValue];
     
-    NSString *stringX = [[NSNumber numberWithUnsignedInteger:Y] stringValue];
-    NSInteger columnName = [[HXNames objectForKey:stringX] integerValue];
+    NSInteger lineName = [self convertNodeNumberToRealY:Y];
+    NSInteger columnName = [self convertNodeNumberToRealX:X];
     
     double newValue = [self getValueFromRealX:columnName 
                                      AndRealY:lineName];
@@ -201,6 +121,12 @@
     [self setValue:newValue 
            ToRealX:columnName 
           AndRealY:lineName];
+    
+//    {
+//        NSString* stringTMP = [NSString stringWithFormat:@"add %f to (%ld,%ld) [%ld,%ld]\n",Value,X,Y,columnName,lineName];
+//        DLog(@"%@",stringTMP);
+//    }
+
     
     
 
@@ -213,13 +139,6 @@
     double r = 0;
        
     r = [[[H objectAtIndex:Y] objectAtIndex:X] doubleValue];
-    //    {
-    //        NSString* stringTMP = [NSString stringWithFormat:@"[%i,%i] r = %f\n",X,Y,r];
-    //        DLog(@"%@",stringTMP);
-    //    }
-    
-    //    r = H2[Y][X];
-    
     return r;
 }
 
@@ -229,28 +148,359 @@
     
     NSNumber *numberValue = [NSNumber numberWithDouble:Value];
     
-    NSMutableArray *HMutable = [H mutableCopy];
-    NSMutableArray *lineMutable = [[H objectAtIndex:Y] mutableCopy];
-    
-    [lineMutable replaceObjectAtIndex:X withObject:numberValue];
-    
-    [HMutable replaceObjectAtIndex:Y withObject:lineMutable];
-    
-    H;
-    
-    H = [[NSArray alloc] initWithArray:HMutable];
-    
-//    [(NSMutableArray*)[H objectAtIndex:Y] replaceObjectAtIndex:X withObject:numberValue];
-    
-//    {
-//        NSString* stringTMP = [NSString stringWithFormat:@"X = %ld Y = %ld Value = %f %f\n", X, Y, Value, [self getValueFromRealX:X AndRealY:Y]];
-//        DLog(@"%@",stringTMP);
-//    }
+    [[H objectAtIndex:Y] replaceObjectAtIndex:X withObject:numberValue];
+}
 
+-(NSUInteger) convertNodeNumberToRealX:(NSUInteger)n{
+    NSString *stringX = [[NSNumber numberWithUnsignedInteger:n] stringValue];
+    NSInteger columnName = [[HXNames objectForKey:stringX] integerValue];
+    
+    return columnName;    
+}
+
+
+
+-(NSUInteger) convertNodeNumberToRealY:(NSUInteger)n{
+    NSString *stringY = [[NSNumber numberWithUnsignedInteger:n] stringValue];
+    NSInteger lineName = [[HYNames objectForKey:stringY] integerValue];
+    
+    return lineName;
+}
+
+- (NSUInteger) convertRealX2NodeNumber:(NSUInteger)nodNum{
     
     
 }
 
 
+-(void) startAddingBC{
+    NSInteger max = 0;
+    for (NSNumber* number in HXNames) {
+        if ([number integerValue] >= max) {
+            max = [number integerValue];
+        }
+    }
+    
+//    {
+//        NSString* stringTMP = [NSString stringWithFormat:@"%ld\n", [[H objectAtIndex:0] count]];
+//        DLog(@"%@",stringTMP);
+//    }
+
+    
+//    ++max;
+    [HXNames setValue:[NSNumber numberWithInteger:max] 
+               forKey:@"LeftSite"];
+    for (NSMutableArray* line in H) {
+        [line addObject:[NSNumber numberWithDouble:0.0]];
+    }
+//    {
+//        NSString* stringTMP = [NSString stringWithFormat:@"%ld\n", [[H objectAtIndex:0] count]];
+//        DLog(@"%@",stringTMP);
+//    }
+//    
+//    {
+//        NSString* stringTMP = [NSString stringWithFormat:@"HYNames = %@ \n HXNames = %@\n", HYNames, HXNames];
+//        DLog(@"%@",stringTMP);
+//    }
+}
+
+-(void) addBC1ForNodeNumber:(NSUInteger)nodeNumber 
+                     andVal:(double)val{
+    NSUInteger lineName = [self convertNodeNumberToRealY:nodeNumber];
+    
+    NSMutableArray* line = [H objectAtIndex:lineName];
+    
+    for (int a = 0; a < [line count]; ++a) {
+        [line replaceObjectAtIndex:a withObject:[NSNumber numberWithDouble:0.0]];
+    }
+    
+    NSInteger columnName = [self convertNodeNumberToRealX:nodeNumber];
+    NSInteger lsName = [self realLeftSite];
+    
+    
+    [line replaceObjectAtIndex:lsName withObject:[NSNumber numberWithDouble:val]];
+//    [line insertObject:[NSNumber numberWithDouble:val] atIndex:lsName];
+    [line replaceObjectAtIndex:columnName withObject:[NSNumber numberWithDouble:1.0]];
+    
+}
+
+-(NSUInteger) realLeftSite{
+    return [[HXNames valueForKey:@"LeftSite"] integerValue];
+}
+
+-(void) swapRealLine1:(NSUInteger)lineA 
+         andRealLine2:(NSUInteger)lineB{
+    
+    NSMutableArray *lineLineA = [H objectAtIndex:lineA];
+    NSMutableArray *lineLineB = [H objectAtIndex:lineB];
+    
+    [H replaceObjectAtIndex:lineA withObject:lineLineB];
+    [H replaceObjectAtIndex:lineB withObject:lineLineA];
+    
+}
+
+-(void) odejmijOdRealLine1:(NSUInteger)lineA 
+                 realLine2:(NSUInteger)lineB 
+              withKvocient:(double)kvocient{
+    //lineA = lineA - lineB*kvocient;
+    
+    NSMutableArray *lineLineA = [H objectAtIndex:lineA];
+    NSMutableArray *lineLineB = [H objectAtIndex:lineB];
+    
+    if ([lineLineA count] != [lineLineB count]) {
+        {
+            NSString* stringTMP = [NSString stringWithFormat:@"dupa line count\n"];
+            DLog(@"%@",stringTMP);
+        }
+
+    }
+    
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"%ld = %dl - %dl * %f\n", lineA, lineA,lineB,kvocient];
+        DLog(@"%@",stringTMP);
+    }
+
+    
+
+    for (NSUInteger i = 0; i < [lineLineA count]; ++i) {
+        double ai = [[lineLineA objectAtIndex:i] doubleValue];
+        double bi = [[lineLineB objectAtIndex:i] doubleValue];
+        
+        double newValueOfAi = ai - bi*kvocient;
+        
+        [lineLineA replaceObjectAtIndex:i withObject:[NSNumber numberWithDouble:newValueOfAi]];
+        
+    }
+    
+}
+
+-(void) gauss{
+    NSUInteger m = [H count];
+    NSUInteger n = [[H objectAtIndex:0] count];
+    
+    NSUInteger i = 0;
+    NSUInteger j = 0;
+    
+    while ((i < m)&&(j < n)) {
+        NSUInteger maxi = i;
+        for (NSUInteger k = i+1; k < m; ++k) {
+            if (abs([self getValueFromRealX:k
+                                   AndRealY:j]) > abs([self getValueFromRealX:maxi
+                                                                     AndRealY:j])) {
+                maxi = k;
+            }
+        }
+        
+        {
+            NSString* stringTMP = [NSString stringWithFormat:@"%@\n",H];
+            DLog(@"%@",stringTMP);
+        }
+
+        
+        
+        if ([self getValueFromRealX:maxi 
+                           AndRealY:j] != 0) {
+            [self swapRealLine1:i 
+                   andRealLine2:maxi];
+            [self podzielRealLine:i 
+                      przezDouble:[self getValueFromRealX:i 
+                                                 AndRealY:j]];
+            
+            
+            for(NSUInteger  u = i+1; u < m; ++u){
+                [self odejmijOdRealLine1:u 
+                               realLine2:i 
+                            withKvocient:[self getValueFromRealX:u 
+                                                        AndRealY:j]];
+            }
+            ++i;
+        }
+        ++j;
+    }
+    
+    
+//    
+//    for (NSInteger a = [H count]-1; a > 0; --a) {
+//        [self odejmijOdRealLine1:a-1 realLine2:a withKvocient:1];
+//    }
+}
+
+
+- (void) podzielRealLine:(NSUInteger)lineNumber 
+             przezDouble:(double)dziel{
+    NSMutableArray* line = [H objectAtIndex:lineNumber];
+    
+    for (NSUInteger i = 0; i < [line count]; ++i){
+        double oldVal = [[line objectAtIndex:i] doubleValue];
+        [line replaceObjectAtIndex:i withObject:[NSNumber numberWithDouble:(oldVal/dziel)]];
+    }
+}
+
+-(void) dlogNames{
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"HYNames = %@ \n HXNames = %@\n", HYNames, HXNames];
+        DLog(@"%@",stringTMP);
+    }
+}
+
+
+-(void) addBC2ForNodeNumber1:(NSUInteger)nodeNumber1 
+              andNodeNumber2:(NSUInteger)nodeNumber2 
+                      andVal:(double)val{
+    
+}
+
+-(void) gauss2{
+    NSInteger m = [H count];
+	NSInteger n = [[H objectAtIndex:0]  count];
+	
+    //	NSEnumerator *enumeratorNeznanke;
+	NSNumber *vrednost;
+    
+	NSInteger i,j;
+	//float matrix[m][n];
+	double **matrix;
+	matrix = (double **) calloc(m, sizeof(double *));
+	for(i = 0; i < m; i++) 
+		matrix[i] = (double *) calloc(n, sizeof(double));
+	
+	
+	
+	//dodajanje elementov v tabelo
+	for(i = 0; i < m; i++) {
+		//enumeratorNeznanke = [[enacbe objectAtIndex:i] objectEnumerator];
+		/*
+         while(vrednost = [enumeratorNeznanke nextObject]) {
+         DLog(@"Dodajam element %@ v %i %i", vrednost, i,j);
+         matrix[i][j] = [vrednost floatValue];
+         j++;
+         }
+		 */
+
+
+		for(j = 0; j < n; j++) {
+//			NSString *key = [NSString stringWithFormat:@"x%d",j];
+//			vrednost = [[enacbe objectAtIndex:i] objectForKey:key];
+            vrednost = [[H objectAtIndex:i] objectAtIndex:j];
+//			DLog(@"Dodajam element %@ v %ld %ld", vrednost, i,j);
+			matrix[i][j] = [vrednost doubleValue];
+//			DLog(@"matrix[%ld][%ld] = %f",i,j,matrix[i][j]);
+		}
+	}
+	
+	/* tukaj se pricne pravo racunanje... v osnovi je treba spraviti matriko v obliko samih enic po diagonali 
+	 (reduced row echelon form)
+	 */
+	// nova (1/2 lastna) verzija
+	//int pivot = 0;
+	double pivotEl;
+	double *temp;
+	i = 0;
+	j = 0;
+	
+	// dol po klancu
+	while( i < m && j < n) {
+		NSInteger maxI = i;
+		NSInteger k, index;
+		for(k = i+1; k < m; k++) {
+			if(abs(matrix[k][j]) > abs(matrix[maxI][j]))
+                maxI = k;
+		}
+		if(matrix[maxI][j] != 0) {
+//			DLog(@"@ swapping rows");
+			//swapping rows
+			temp = matrix[maxI];
+			matrix[maxI] = matrix[i];
+			matrix[i] = temp;
+			
+			pivotEl = matrix[i][j];
+			for(index = j; index < n; index++) {
+				matrix[i][index] = matrix[i][index] / pivotEl;
+//				DLog(@"matrix[%ld][%ld] = %f",i,index,matrix[i][index]);
+			}
+			
+			k = i+1;
+			while(k < m) {
+				float kvocient = matrix[k][j];
+				for(index = j; index < n; index++) {
+					matrix[k][index] -= matrix[i][index] * kvocient;
+//					DLog(@"matrix[%ld][%ld] = %f",k,index,matrix[k][index]);
+				}
+				k++;
+			}
+			i++;
+		}
+		j++;
+	}
+	//gor po hribu
+	i = m - 1;
+	j = n - 2;
+	
+	// dol po klancu
+	while( i >= 0 && j >= 0) {
+		NSInteger maxI = i;
+		NSInteger k, index;
+		for(k = i-1; k >= 0; k--) {
+			if(abs(matrix[k][j]) > abs(matrix[maxI][j]))
+				maxI = k;
+		}
+		if(matrix[maxI][j] != 0) {
+//			DLog(@"@ swapping rows");
+			//swapping rows
+			temp = matrix[maxI];
+			matrix[maxI] = matrix[i];
+			matrix[i] = temp;
+			
+			//column division
+			pivotEl = matrix[i][j];
+			for(index = j; index < n; index++) {
+				matrix[i][index] = matrix[i][index] / pivotEl;
+//				DLog(@"matrix[%ld][%ld] = %f",i,index,matrix[i][index]);
+			}
+			
+			k = i-1;
+			while(k >= 0) {
+				float kvocient = matrix[k][j];
+				for(index = j; index < n; index++) {
+					matrix[k][index] -= matrix[i][index] * kvocient;
+//					DLog(@"matrix[%ld][%ld] = %f",k,index,matrix[k][index]);
+				}
+				k--;
+			}
+			i--;
+		}
+		j--;
+	}
+	
+    
+	
+	DLog(@"@ packing");
+	//pakiranje veselih rezulatov
+	NSNumber *value;// = [[NSNumber alloc] init];
+	NSString *key;// = [[NSString alloc] init];
+    NSUInteger nodeNumber = 0;
+	//NSString *niz = [[NSMutableString alloc] initWithString:@"x"];
+	for(i = 0; i < m; i++) {
+		value = [NSNumber numberWithFloat:matrix[i][n-1]];
+        nodeNumber = [self getNodeNumberFromRealX:i];
+		DLog(@"Value of node %ld is: %@, matrix = %f", nodeNumber, value, matrix[i][n-1]);
+        Nodes* n = [coreData getNodeWithNumber:nodeNumber];
+        n.temp = value;
+		key = [NSString stringWithFormat:@"x%d",i];
+		
+//		[resitve setObject:value forKey:key];
+	}
+    [coreData saveCD];
+	//[value release];
+//	[key release];
+	
+	//sproscanje memorija za matriko
+	free(matrix);
+
+}
+
+-(NSUInteger) getNodeNumberFromRealX:(NSUInteger)X{
+    return [[HXNamesRevers objectForKey:[[NSNumber numberWithUnsignedInteger:X] stringValue]] unsignedIntegerValue];
+}
 
 @end

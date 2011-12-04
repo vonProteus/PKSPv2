@@ -49,13 +49,13 @@
     double h32 = h*((p1.y-p2.y)*(p3.y-p1.y)+(p2.x-p1.x)*(p1.x-p3.x));
     double h33 = h*((p1.y-p2.y)*(p1.y-p2.y)+(p2.x-p1.x)*(p2.x-p1.x));
     
-//    {
-//        NSString* stringTMP = [NSString stringWithFormat:@"%f %f %f %f %f %f %f %f %f\n", h11, h12, h13, h21, h22, h23, h31, h32, h33];
-//        DLog(@"%@",stringTMP);
-//    }
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"%f %f %f %f %f %f %f %f %f\n", h11, h12, h13, h21, h22, h23, h31, h32, h33];
+        DLog(@"%@",stringTMP);
+    }
 
     
-    [ThisMatrix dlog2];
+//    [ThisMatrix dlog2];
     
     
     [ThisMatrix addByNumberOfNodeValue:h11 
@@ -86,7 +86,7 @@
                                ToNode1:[self.n3.number unsignedIntegerValue] 
                               AndNode2:[self.n3.number unsignedIntegerValue]];
     
-    [ThisMatrix dlog2];
+//    [ThisMatrix dlog2];
 }
 
 

@@ -119,6 +119,22 @@
     
     [gm fillGlobalMatrix];
     
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"BC start\n"];
+        DLog(@"%@",stringTMP);
+    }
+
+//    [gm dlog2];
+    
+    [gm startAddingBC];
+//    [gm dlogNames];
+//    [gm dlog2];
+    [gm addBC1ForNodeNumber:2 andVal:100];
+//    [gm dlog2];
+   
+    [gm gauss2];
+    
+    
 //    [gm add:2 ToX:3 AndY:3]; 
     
     {
@@ -126,9 +142,13 @@
         DLog(@"%@",stringTMP);
     }
 
-    [gm dlog2];
+//    [gm dlog2];
 //    [gm dlog];
     
+    for (n in [coreData allNodes]) {
+        [n dlog];
+    }
+//    NSBeep();
     
    
     DLog(@"end");
