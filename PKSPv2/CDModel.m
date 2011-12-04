@@ -183,7 +183,6 @@
         for (Nodes* del in mutableFetchResults) {
             
             //        [self removeElementWithNodeWithNumber:number];
-            
             [myManagedObjectContext deleteObject:del];
             [myManagedObjectContext save:&error];
             if (error != nil) {
@@ -194,6 +193,18 @@
         }
     }
     
+}
+             
+-(void) removeCDObiect:(NSManagedObject*)obj{
+    NSManagedObjectContext *myManagedObjectContext = [[CDModel sharedModel] managedObjectContext];
+    NSError *error = nil;  
+    
+    [myManagedObjectContext deleteObject:obj];
+    [myManagedObjectContext save:&error];
+    if (error != nil) {
+        //TODO: error hendeling
+        DLog(@"error %@\n", error);
+    }
 }
 
 

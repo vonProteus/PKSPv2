@@ -11,5 +11,6 @@
 @interface Nodes (Metods)
 
 -(void) dlog;
+-(NSPoint) pointValue;
 
 @end

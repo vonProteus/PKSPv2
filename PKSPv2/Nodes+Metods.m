@@ -14,4 +14,8 @@
     DLog(@"%i (%f,%f) T:%f", [self.number intValue], [self.x floatValue], [self.y floatValue], [self.temp floatValue]);
 }
 
+-(NSPoint) pointValue{
+    return NSMakePoint([self.x floatValue], [self.y floatValue]);
+}
+
 @end

@@ -19,6 +19,7 @@
 		705438F7148181B3008C006E /* Elements+Metods.m in Sources */ = {isa = PBXBuildFile; fileRef = 705438F6148181B3008C006E /* Elements+Metods.m */; };
 		70B12EB1148BCA5400DBA209 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B12EB0148BCA5400DBA209 /* MainView.m */; };
 		70B12EB6148BCB4A00DBA209 /* MenuBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B12EB5148BCB4A00DBA209 /* MenuBarController.m */; };
+		70B12EBE148BDAF600DBA209 /* Mesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B12EBD148BDAF600DBA209 /* Mesh.m */; };
 		70D471D5148157EA00DB9A77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D471D4148157EA00DB9A77 /* Cocoa.framework */; };
 		70D471DF148157EA00DB9A77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70D471DD148157EA00DB9A77 /* InfoPlist.strings */; };
 		70D471E1148157EA00DB9A77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D471E0148157EA00DB9A77 /* main.m */; };
@@ -67,6 +68,8 @@
 		70B12EB0148BCA5400DBA209 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
 		70B12EB4148BCB4A00DBA209 /* MenuBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuBarController.h; sourceTree = "<group>"; };
 		70B12EB5148BCB4A00DBA209 /* MenuBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuBarController.m; sourceTree = "<group>"; };
+		70B12EBC148BDAF600DBA209 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		70B12EBD148BDAF600DBA209 /* Mesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mesh.m; sourceTree = "<group>"; };
 		70D471D0148157EA00DB9A77 /* PKSPv2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PKSPv2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D471D4148157EA00DB9A77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		70D471D7148157EA00DB9A77 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -146,10 +149,8 @@
 		705438E614817D6C008C006E /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				705438E814817DA3008C006E /* Solver.h */,
-				705438E914817DA3008C006E /* Solver.m */,
-				705438EB14817DD0008C006E /* GlobalMatrix.h */,
-				705438EC14817DD0008C006E /* GlobalMatrix.m */,
+				70B12EBB148BDAD900DBA209 /* Solver */,
+				70B12EBF148BDAFC00DBA209 /* Mesh */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -189,6 +190,26 @@
 				70B12EB5148BCB4A00DBA209 /* MenuBarController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		70B12EBB148BDAD900DBA209 /* Solver */ = {
+			isa = PBXGroup;
+			children = (
+				705438E814817DA3008C006E /* Solver.h */,
+				705438E914817DA3008C006E /* Solver.m */,
+				705438EB14817DD0008C006E /* GlobalMatrix.h */,
+				705438EC14817DD0008C006E /* GlobalMatrix.m */,
+			);
+			name = Solver;
+			sourceTree = "<group>";
+		};
+		70B12EBF148BDAFC00DBA209 /* Mesh */ = {
+			isa = PBXGroup;
+			children = (
+				70B12EBC148BDAF600DBA209 /* Mesh.h */,
+				70B12EBD148BDAF600DBA209 /* Mesh.m */,
+			);
+			name = Mesh;
 			sourceTree = "<group>";
 		};
 		70D471C5148157EA00DB9A77 = {
@@ -426,6 +447,7 @@
 				705438F7148181B3008C006E /* Elements+Metods.m in Sources */,
 				70B12EB1148BCA5400DBA209 /* MainView.m in Sources */,
 				70B12EB6148BCB4A00DBA209 /* MenuBarController.m in Sources */,
+				70B12EBE148BDAF600DBA209 /* Mesh.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,49 @@
 //
 
 #import "MenuBarController.h"
+#include "Mesh.h"
 
 @implementation MenuBarController
+@synthesize mainView;
 
+-(id) init{
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"init MenuBarController\n"];
+        DLog(@"%@",stringTMP);
+    }
+    coreData = [CDModel sharedModel];
+    return  self;
+}
+
+-(IBAction)cleanNodes:(id)sender{
+    for (Nodes * n in [coreData allNodes]) {
+        [coreData removeCDObiect:n];
+    }
+    mainView.mode = addingNodes;
+    [mainView display];
+}
+
+-(IBAction)addNodes:(id)sender{
+    mainView.mode = addingNodes;
+}
+
+-(IBAction)stopAddNodes:(id)sender{
+    mainView.mode = nothing;
+}
+
+
+-(IBAction)cleanMash:(id)sender{
+    for (Elements * e in [coreData allElements]) {
+        [coreData removeCDObiect:e];
+    }
+    [mainView display];
+}
+
+-(IBAction)addMash:(id)sender{
+    mainView.mode = nothing;
+    Mesh * mesh = [[Mesh alloc] init];
+    mesh.bounds = mainView.bounds;
+    [mesh go];
+    [mainView display];
+}
 @end

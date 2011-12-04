@@ -33,7 +33,7 @@
     
     
     Nodes *n;
-    Elements *e;
+//    Elements *e;
     
     n = [coreData addNewNode];
     n.x = [NSNumber numberWithDouble:0];

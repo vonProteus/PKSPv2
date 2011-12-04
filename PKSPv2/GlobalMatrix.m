@@ -7,7 +7,6 @@
 //
 
 #import "GlobalMatrix.h"
-#import "VTGauss.h"
 
 
 @implementation GlobalMatrix
@@ -167,10 +166,6 @@
     return lineName;
 }
 
-- (NSUInteger) convertRealX2NodeNumber:(NSUInteger)nodNum{
-    
-    
-}
 
 
 -(void) startAddingBC{

@@ -39,6 +39,8 @@
 
 - (Elements*) makeElementFromNode1:(Nodes*)nn1 Node2:(Nodes*)nn2 Node3:(Nodes*)nn3;
 
+-(void) removeCDObiect:(NSManagedObject*)obj;
+
 
 
 @end

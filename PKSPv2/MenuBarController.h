@@ -7,7 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MainView.h"
+#import "CDModel.h"
 
-@interface MenuBarController : NSObject
+
+@interface MenuBarController : NSObject {
+    CDModel* coreData;
+}
+@property (retain) IBOutlet MainView* mainView;
+
+-(IBAction)cleanNodes:(id)sender;
+-(IBAction)addNodes:(id)sender;
+-(IBAction)stopAddNodes:(id)sender;
+
+
+-(IBAction)cleanMash:(id)sender;
+-(IBAction)addMash:(id)sender;
+
 
 @end

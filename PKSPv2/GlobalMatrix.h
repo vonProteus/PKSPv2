@@ -50,7 +50,7 @@
 
 - (NSUInteger) convertNodeNumberToRealX:(NSUInteger)n;
 - (NSUInteger) convertNodeNumberToRealY:(NSUInteger)n;
-- (NSUInteger) convertRealX2NodeNumber:(NSUInteger)nodNum;
+
 
 - (NSUInteger) realLeftSite;
 
@@ -67,6 +67,6 @@
 - (void) gauss;
 - (void) gauss2;
 
-- (NSUInteger) getNodeNumberFromRealX:(NSUInteger)X;
+-(NSUInteger) getNodeNumberFromRealX:(NSUInteger)X;
 
 @end
