@@ -289,7 +289,7 @@
         if ([output count] == 0) {
             {
                 NSString* stringTMP = [NSString stringWithFormat:@"Twoze nod bo nie ma takiego\n"];
-                DLog(@"%@",stringTMP);
+//                DLog(@"%@",stringTMP);
             }
             
             Nodes* n = [self addNewNode];

@@ -25,6 +25,8 @@
 		70B12EB1148BCA5400DBA209 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B12EB0148BCA5400DBA209 /* MainView.m */; };
 		70B12EB6148BCB4A00DBA209 /* MenuBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B12EB5148BCB4A00DBA209 /* MenuBarController.m */; };
 		70B12EBE148BDAF600DBA209 /* Mesh.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B12EBD148BDAF600DBA209 /* Mesh.m */; };
+		70BBCAB2148D14D000686919 /* PlistConf.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BBCAB1148D14D000686919 /* PlistConf.m */; };
+		70BBCAB5148D1E1900686919 /* PKSPv2 Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70BBCAB4148D1E1900686919 /* PKSPv2 Settings.plist */; };
 		70D471D5148157EA00DB9A77 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70D471D4148157EA00DB9A77 /* Cocoa.framework */; };
 		70D471DF148157EA00DB9A77 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 70D471DD148157EA00DB9A77 /* InfoPlist.strings */; };
 		70D471E1148157EA00DB9A77 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 70D471E0148157EA00DB9A77 /* main.m */; };
@@ -85,6 +87,9 @@
 		70B12EB5148BCB4A00DBA209 /* MenuBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuBarController.m; sourceTree = "<group>"; };
 		70B12EBC148BDAF600DBA209 /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
 		70B12EBD148BDAF600DBA209 /* Mesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mesh.m; sourceTree = "<group>"; };
+		70BBCAB0148D14D000686919 /* PlistConf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlistConf.h; sourceTree = "<group>"; };
+		70BBCAB1148D14D000686919 /* PlistConf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlistConf.m; sourceTree = "<group>"; };
+		70BBCAB4148D1E1900686919 /* PKSPv2 Settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PKSPv2 Settings.plist"; sourceTree = "<group>"; };
 		70D471D0148157EA00DB9A77 /* PKSPv2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PKSPv2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		70D471D4148157EA00DB9A77 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		70D471D7148157EA00DB9A77 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -211,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				70D4720F148158A800DB9A77 /* CoreData */,
+				70BBCAB4148D1E1900686919 /* PKSPv2 Settings.plist */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -350,6 +356,8 @@
 		70D47213148158F600DB9A77 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				70BBCAB0148D14D000686919 /* PlistConf.h */,
+				70BBCAB1148D14D000686919 /* PlistConf.m */,
 				70D472141481590800DB9A77 /* NSFileManager+DirectoryLocations.h */,
 				70D472151481590800DB9A77 /* NSFileManager+DirectoryLocations.m */,
 			);
@@ -431,6 +439,7 @@
 				70D471EB148157EB00DB9A77 /* MainMenu.xib in Resources */,
 				703AEF3D14815DF0003FE12E /* Tmp.xib in Resources */,
 				702F0E631482AFED008B1171 /* README in Resources */,
+				70BBCAB5148D1E1900686919 /* PKSPv2 Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +495,7 @@
 				701F7E35148CDDDE005A6176 /* DelaunayTriangle.m in Sources */,
 				701F7E36148CDDDE005A6176 /* DelaunayTriangulation.m in Sources */,
 				701F7E37148CDDDE005A6176 /* VoronoiCell.m in Sources */,
+				70BBCAB2148D14D000686919 /* PlistConf.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

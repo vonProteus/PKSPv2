@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "MainView.h"
 #import "CDModel.h"
+#import "PlistConf.h"
 
 
 @interface MenuBarController : NSObject {
     CDModel* coreData;
 }
 @property (retain) IBOutlet MainView* mainView;
+@property (retain) IBOutlet NSWindow* bCWindow;
 
 -(IBAction)cleanNodes:(id)sender;
 -(IBAction)addNodes:(id)sender;
@@ -23,6 +25,11 @@
 
 -(IBAction)cleanMash:(id)sender;
 -(IBAction)addMash:(id)sender;
+
+-(IBAction)startAddingBC:(id)sender;
+-(IBAction)addBC1:(id)sender;
+-(IBAction)addBC2:(id)sender;
+
 
 
 @end

@@ -9,8 +9,10 @@
 #import "MenuBarController.h"
 #include "Mesh.h"
 
+
 @implementation MenuBarController
 @synthesize mainView;
+@synthesize bCWindow;
 
 -(id) init{
     {
@@ -18,6 +20,7 @@
         DLog(@"%@",stringTMP);
     }
     coreData = [CDModel sharedModel];
+    
     return  self;
 }
 
@@ -52,4 +55,18 @@
     [mesh go];
     [mainView display];
 }
+
+
+-(IBAction)startAddingBC:(id)sender{
+    bCWindow.isVisible = !bCWindow.isVisible;
+}
+-(IBAction)addBC1:(id)sender{
+    
+}
+-(IBAction)addBC2:(id)sender{
+    
+}
+
+
+
 @end
