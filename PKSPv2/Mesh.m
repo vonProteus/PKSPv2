@@ -7,6 +7,9 @@
 //
 
 #import "Mesh.h"
+#import "DelaunayTriangle.h"
+#import "DelaunayPoint.h"
+#import "DelaunayTriangulation.h"
 
 @implementation Mesh
 @synthesize numberOfPointsToAdd;
@@ -148,77 +151,12 @@
 
 
 -(void) bildElements{
-    Nodes* n1 = Nil;
-    Nodes* n2 = Nil;
-    Nodes* n3 = Nil;
+    DelaunayTriangulation *triangulation = [DelaunayTriangulation triangulation];
     
-   
-    
-    NSArray* allNodes = [coreData allNodes];
-    
-    for (NSUInteger node1 = 0; node1 < [allNodes count]; ++node1) {
-        n1 = [allNodes objectAtIndex:node1];
-        NSPoint p1 = [n1 pointValue];
-
-        double d2 = DBL_MAX;
-        double d3 = DBL_MAX;
-        
-        for (NSUInteger node2 = 0; node2 < [allNodes count]; ++node2) {
-            if (node1 == node2) {
-                continue;
-            }
-            Nodes* nTmp = [allNodes objectAtIndex:node2];
-            NSPoint pTmp = [nTmp pointValue];
-            
-            double dTmp = [self distanceFromP1:p1 toP2:pTmp];
-            if (d2 > dTmp) {
-                d3 = d2;
-                d2 = dTmp;
-                n3 = n2;
-                n2 = nTmp;
-                
-
-            }
-        }
-        
-        if (n3 == Nil) {
-            NSUInteger n2Number = [n2.number unsignedIntegerValue];
-            
-            for (NSUInteger node3 = 0; node3 < [allNodes count]; ++node3) {
-                if (node1 == node3) {
-                    continue;
-                }
-                Nodes* nTmp = [allNodes objectAtIndex:node3];
-                NSUInteger nTmpNumber = [nTmp.number unsignedIntegerValue];
-                if (n2Number == nTmpNumber) {
-                    continue;
-                }
-                NSPoint pTmp = [nTmp pointValue];
-                
-                double dTmp = [self distanceFromP1:p1 toP2:pTmp];
-                if (d3 > dTmp) {
-                    d3 = dTmp;
-                    n3 = nTmp;
-                }
-            }
-
-        }
-        
-        
-        {
-            NSString* stringTMP = [NSString stringWithFormat:@"%ld %f %ld %f %ld\n",[n1.number unsignedIntegerValue], d2,[n2.number unsignedIntegerValue], d3, [n3.number unsignedIntegerValue]];
-            DLog(@"%@",stringTMP);
-        }
-        
-//        [n1 dlog];
-//        [n2 dlog];
-//        [n3 dlog];
-        [coreData makeElementFromNode1:n1 
-                                 Node2:n2
-                                 Node3:n3];
-        
-        
+    for (Nodes* n in [coreData allNodes]) {
+        [triangulation addPoint:<#(DelaunayPoint *)#>]
     }
+    
 }
 
 -(double) distanceFromP1:(NSPoint)p1 

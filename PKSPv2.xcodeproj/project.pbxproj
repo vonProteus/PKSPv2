@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		701F7E33148CDDDE005A6176 /* DelaunayPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 701F7E2A148CDDDE005A6176 /* DelaunayPoint.m */; };
+		701F7E34148CDDDE005A6176 /* DelaunayEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = 701F7E2C148CDDDE005A6176 /* DelaunayEdge.m */; };
+		701F7E35148CDDDE005A6176 /* DelaunayTriangle.m in Sources */ = {isa = PBXBuildFile; fileRef = 701F7E2E148CDDDE005A6176 /* DelaunayTriangle.m */; };
+		701F7E36148CDDDE005A6176 /* DelaunayTriangulation.m in Sources */ = {isa = PBXBuildFile; fileRef = 701F7E30148CDDDE005A6176 /* DelaunayTriangulation.m */; };
+		701F7E37148CDDDE005A6176 /* VoronoiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 701F7E32148CDDDE005A6176 /* VoronoiCell.m */; };
 		702F0E631482AFED008B1171 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 702F0E621482AFED008B1171 /* README */; };
 		703AEF3114815C00003FE12E /* Elements.m in Sources */ = {isa = PBXBuildFile; fileRef = 703AEF3014815C00003FE12E /* Elements.m */; };
 		703AEF3814815C3A003FE12E /* Nodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 703AEF3714815C39003FE12E /* Nodes.m */; };
@@ -46,6 +51,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		701F7E29148CDDDE005A6176 /* DelaunayPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelaunayPoint.h; sourceTree = "<group>"; };
+		701F7E2A148CDDDE005A6176 /* DelaunayPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelaunayPoint.m; sourceTree = "<group>"; };
+		701F7E2B148CDDDE005A6176 /* DelaunayEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelaunayEdge.h; sourceTree = "<group>"; };
+		701F7E2C148CDDDE005A6176 /* DelaunayEdge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelaunayEdge.m; sourceTree = "<group>"; };
+		701F7E2D148CDDDE005A6176 /* DelaunayTriangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelaunayTriangle.h; sourceTree = "<group>"; };
+		701F7E2E148CDDDE005A6176 /* DelaunayTriangle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelaunayTriangle.m; sourceTree = "<group>"; };
+		701F7E2F148CDDDE005A6176 /* DelaunayTriangulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelaunayTriangulation.h; sourceTree = "<group>"; };
+		701F7E30148CDDDE005A6176 /* DelaunayTriangulation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelaunayTriangulation.m; sourceTree = "<group>"; };
+		701F7E31148CDDDE005A6176 /* VoronoiCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoronoiCell.h; sourceTree = "<group>"; };
+		701F7E32148CDDDE005A6176 /* VoronoiCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VoronoiCell.m; sourceTree = "<group>"; };
 		702F0E621482AFED008B1171 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		703AEF2F14815C00003FE12E /* Elements.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Elements.h; sourceTree = "<group>"; };
 		703AEF3014815C00003FE12E /* Elements.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Elements.m; sourceTree = "<group>"; };
@@ -117,6 +132,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		701F7E27148CDDA8005A6176 /* Edgy */ = {
+			isa = PBXGroup;
+			children = (
+				701F7E29148CDDDE005A6176 /* DelaunayPoint.h */,
+				701F7E2A148CDDDE005A6176 /* DelaunayPoint.m */,
+				701F7E2B148CDDDE005A6176 /* DelaunayEdge.h */,
+				701F7E2C148CDDDE005A6176 /* DelaunayEdge.m */,
+				701F7E2D148CDDDE005A6176 /* DelaunayTriangle.h */,
+				701F7E2E148CDDDE005A6176 /* DelaunayTriangle.m */,
+				701F7E2F148CDDDE005A6176 /* DelaunayTriangulation.h */,
+				701F7E30148CDDDE005A6176 /* DelaunayTriangulation.m */,
+				701F7E31148CDDDE005A6176 /* VoronoiCell.h */,
+				701F7E32148CDDDE005A6176 /* VoronoiCell.m */,
+			);
+			name = Edgy;
+			sourceTree = "<group>";
+		};
 		703AEF3E14815E03003FE12E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +238,7 @@
 		70B12EBF148BDAFC00DBA209 /* Mesh */ = {
 			isa = PBXGroup;
 			children = (
+				701F7E27148CDDA8005A6176 /* Edgy */,
 				70B12EBC148BDAF600DBA209 /* Mesh.h */,
 				70B12EBD148BDAF600DBA209 /* Mesh.m */,
 			);
@@ -448,6 +481,11 @@
 				70B12EB1148BCA5400DBA209 /* MainView.m in Sources */,
 				70B12EB6148BCB4A00DBA209 /* MenuBarController.m in Sources */,
 				70B12EBE148BDAF600DBA209 /* Mesh.m in Sources */,
+				701F7E33148CDDDE005A6176 /* DelaunayPoint.m in Sources */,
+				701F7E34148CDDDE005A6176 /* DelaunayEdge.m in Sources */,
+				701F7E35148CDDDE005A6176 /* DelaunayTriangle.m in Sources */,
+				701F7E36148CDDDE005A6176 /* DelaunayTriangulation.m in Sources */,
+				701F7E37148CDDDE005A6176 /* VoronoiCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
