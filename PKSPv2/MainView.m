@@ -7,6 +7,7 @@
 //
 
 #import "MainView.h"
+#import "PlistConf.h"
 
 @implementation MainView
 @synthesize mode;
@@ -144,12 +145,30 @@
             
         case addingNodes:
             {
+                if (!(lastPoint.x == 0 && lastPoint.y == 0)) {
+                    NSPoint delta = NSMakePoint(lastPoint.x - location.x, lastPoint.y - location.y);
+                    double d = sqrt(delta.x*delta.x+ delta.y*delta.y);
+                    NSUInteger k = (NSUInteger)(d/[[PlistConf valueForKey:@"spaceBetwenNodesOnEadge"] unsignedIntegerValue]);
+                    NSPoint step = delta;
+                    step.x /= k;
+                    step.y /= k;
+                    
+                    for (NSUInteger a = 0; a < k; ++a) {
+                        NSPoint tmpLocation = NSMakePoint(lastPoint.x - a*step.x, lastPoint.y - a*step.y);
+                        Nodes *n;
+                        n = [coreData addNewNode];
+                        n.x = [NSNumber numberWithFloat:tmpLocation.x];
+                        n.y = [NSNumber numberWithFloat:tmpLocation.y];
+                    }
+                }
+                
                 Nodes *n;
                 n = [coreData addNewNode];
                 n.x = [NSNumber numberWithFloat:location.x];
                 n.y = [NSNumber numberWithFloat:location.y];
                 
                 [coreData saveCD];
+                lastPoint = location;
                 [self display];
             }
             break;

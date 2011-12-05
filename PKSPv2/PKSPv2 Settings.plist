@@ -10,5 +10,7 @@
 	<integer>20</integer>
 	<key>nodeSizeY</key>
 	<integer>20</integer>
+	<key>spaceBetwenNodesOnEadge</key>
+	<integer>10</integer>
 </dict>
 </plist>
