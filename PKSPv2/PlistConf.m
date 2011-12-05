@@ -10,45 +10,57 @@
 #import "NSFileManager+DirectoryLocations.h"
 
 
-
-
 @implementation PlistConf
 
 
 
 +(NSDictionary*) plistConf{
-     NSString* plistName = @"PKSPv2 Settings.plist";
+    NSString* plistName = @"PKSPv2 Settings.plist";
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSError *error;
-    NSURL* plistPath = [PlistConf path];
-       
-    BOOL success = [fileManager fileExistsAtPath:[NSString stringWithContentsOfURL:plistPath]];
+    NSMutableArray *paths = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) mutableCopy];
+    [paths insertObject:[fileManager applicationSupportDirectory] atIndex:0];
+    NSString *plistPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:plistName];
+    
+    BOOL success = [fileManager fileExistsAtPath:plistPath];
     if(!success){
         //file does not exist. So look into mainBundle
         NSString *defaultPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:plistName];
-        success = [fileManager copyItemAtPath:defaultPath toPath:[[fileManager applicationSupportDirectory] stringByAppendingPathComponent:plistName] error:&error];
-        
-        {
-            NSString* stringTMP = [NSString stringWithFormat:@"resourcePath %@ applicationSupportDirectory %@\n", defaultPath, [fileManager applicationSupportDirectory]];
-            DLog(@"%@",stringTMP);
-        }
-
+        success = [fileManager copyItemAtPath:defaultPath toPath:plistPath error:&error];
     }
     if (success) {
-        NSDictionary *confDict = [NSDictionary dictionaryWithContentsOfURL:plistPath];
+        paths = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) mutableCopy];
+        [paths insertObject:[fileManager applicationSupportDirectory] atIndex:0];
+        plistPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:plistName];
+        NSDictionary *confDict=[NSDictionary dictionaryWithContentsOfFile:plistPath];
         return confDict;
     }
     return nil;
 }
 
-+(NSURL*) path{
++(NSString*) path{
+    NSString* plistName = @"PKSPv2 Settings.plist";
     
-     NSString* plistName = @"PKSPv2 Settings.plist";
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSError *error;
+    NSMutableArray *paths = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) mutableCopy];
+    [paths insertObject:[fileManager applicationSupportDirectory] atIndex:0];
+    NSString *plistPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:plistName];
     
-    NSURL *libraryPath = [NSURL fileURLWithPath:[[NSFileManager defaultManager] applicationSupportDirectory]];
-    
-    return [libraryPath URLByAppendingPathComponent:plistName];
+    BOOL success = [fileManager fileExistsAtPath:plistPath];
+    if(!success){
+        //file does not exist. So look into mainBundle
+        NSString *defaultPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:plistName];
+        success = [fileManager copyItemAtPath:defaultPath toPath:plistPath error:&error];
+    }
+    if (success) {
+        paths = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) mutableCopy];
+        [paths insertObject:[fileManager applicationSupportDirectory] atIndex:0];
+        plistPath = [[paths objectAtIndex:0] stringByAppendingPathComponent:plistName];
+        return plistPath;
+    }
+    return nil;
 }
 
 +(id) valueForKey:(NSString *)Key{
@@ -60,7 +72,8 @@
     
     [confDict setValue:Value forKey:Key];
     
-    [confDict writeToURL:[PlistConf path] atomically:YES];
+    [confDict writeToFile:[PlistConf path] atomically:YES];
+
 }
 
 @end

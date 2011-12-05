@@ -15,8 +15,7 @@
 
 
 +(NSDictionary*) plistConf;
-+(NSURL*) path;
-
++(NSString*) path;
 +(id) valueForKey:(NSString*)Key;
 +(void) setValue:(id)Value forKey:(NSString*)Key;
 

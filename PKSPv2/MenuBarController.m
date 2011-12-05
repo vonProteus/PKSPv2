@@ -21,6 +21,15 @@
     }
     coreData = [CDModel sharedModel];
     
+    {
+        
+        NSString* stringTMP = [NSString stringWithFormat:@"plist: %@\n", [PlistConf valueForKey:@"test"]];
+        DLog(@"%@",stringTMP);
+    }
+
+    
+    [PlistConf setValue:@"set" forKey:@"key"];
+    
     return  self;
 }
 

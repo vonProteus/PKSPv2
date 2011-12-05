@@ -4,5 +4,11 @@
 <dict>
 	<key>test</key>
 	<string>dziala?</string>
+	<key>numberOfPointsToAdd</key>
+	<integer>100</integer>
+	<key>nodeSizeX</key>
+	<integer>20</integer>
+	<key>nodeSizeY</key>
+	<integer>20</integer>
 </dict>
 </plist>

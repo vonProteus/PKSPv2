@@ -10,6 +10,7 @@
 #import "DelaunayTriangle.h"
 #import "DelaunayPoint.h"
 #import "DelaunayTriangulation.h"
+#include "PlistConf.h"
 
 @implementation Mesh
 @synthesize numberOfPointsToAdd;
@@ -20,9 +21,15 @@
     coreData = [CDModel sharedModel];
     n = [[coreData allNodes] count];
 	polygon = (NSPoint *) calloc(n, sizeof(NSPoint));
-    self.numberOfPointsToAdd = 100;
-    self.nodeSizeX = 50;
-    self.nodeSizeY = 50;
+    self.numberOfPointsToAdd = [[PlistConf valueForKey:@"numberOfPointsToAdd"] unsignedIntegerValue];
+    self.nodeSizeX =  [[PlistConf valueForKey:@"nodeSizeX"] unsignedIntegerValue];
+    self.nodeSizeY =  [[PlistConf valueForKey:@"nodeSizeY"] unsignedIntegerValue];
+    
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"nsx %ld nsy %ld class %@\n", self.nodeSizeX, self.nodeSizeY, [PlistConf valueForKey:@"test"]];
+        DLog(@"%@",stringTMP);
+    }
+
     
     
     
