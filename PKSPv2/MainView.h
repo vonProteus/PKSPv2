@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #include "CDModel.h"
+@class MenuBarController;
 
 typedef enum MainViewMode {
     nothing,
@@ -19,10 +20,10 @@ typedef enum MainViewMode {
 @interface MainView : NSView{
     CDModel* coreData;
 }
-
-@property (assign) NSPoint lastPoint;
+@property (retain) MenuBarController* mbc;
+@property (assign) NSPoint lastPoint, bc2P1, bc2P2;
 @property (assign) MainViewMode mode;
-@property (assign) NSUInteger rOfNode;
+@property (assign) double rOfNode;
 
 - (void)drawNodes;
 - (void)drawElemenys;

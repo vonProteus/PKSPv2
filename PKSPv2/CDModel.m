@@ -272,46 +272,50 @@
 
 - (Nodes*) getOrCreateNodeWithX:(float)x 
                            andY:(float)y{
+    Nodes *r = [self getNodeWithX:x andY:y inR:0];
+    if (r == nil) {
+        r = [self addNewNode];
+        r.x = [NSNumber numberWithFloat:x];
+        r.y = [NSNumber numberWithFloat:y];
+    }
+    return r;
+}
+
+- (Nodes*) getNodeWithX:(float)x 
+                    andY:(float)y 
+                    inR:(float)r{
     NSManagedObjectContext *myManagedObjectContext = [[CDModel sharedModel] managedObjectContext];
     
     NSEntityDescription *nodes = [NSEntityDescription entityForName:@"Nodes" inManagedObjectContext:myManagedObjectContext];
     NSFetchRequest *requestToNodes = [[NSFetchRequest alloc] init]; 
     [requestToNodes setEntity:nodes]; 
-    NSPredicate *myNodeQuestion = [NSPredicate predicateWithFormat:@"x = %f && y = %f", x, y];
+    NSPredicate *myNodeQuestion = [NSPredicate predicateWithFormat:@"x >= %f && x =< %f && y >= %f && y =< %f", x-r, x+r, y-r, y+r];
     [requestToNodes setPredicate:myNodeQuestion];
     
-//    DLog(@"pre out");
+    //    DLog(@"pre out");
     NSError *error = nil;  
     NSMutableArray* output = [[myManagedObjectContext executeFetchRequest:requestToNodes error:&error] mutableCopy]; 
-//    DLog(@"post out");
+    //    DLog(@"post out");
     
     if(error == nil){
-        if ([output count] == 0) {
-            {
-                NSString* stringTMP = [NSString stringWithFormat:@"Twoze nod bo nie ma takiego\n"];
-//                DLog(@"%@",stringTMP);
-            }
-            
-            Nodes* n = [self addNewNode];
-            n.x = [NSNumber numberWithFloat:x];
-            n.y = [NSNumber numberWithFloat:y];
-            return n;
-
+        if ([output count] == 1) {
+            return [output objectAtIndex:0];
+        } else {
+            return nil;
         }
-        return [output objectAtIndex:0];
-        
         
     } else {
         {
             NSString* stringTMP = [NSString stringWithFormat:@"error\n"];
             DLog(@"%@",stringTMP);
         }
-
+        
     }
     
     return nil;    
-
+    
     
 }
+
 
 @end

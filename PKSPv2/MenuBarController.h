@@ -10,6 +10,7 @@
 #import "MainView.h"
 #import "CDModel.h"
 #import "PlistConf.h"
+#import "Solver.h"
 
 typedef enum AppState {
     noder,
@@ -20,10 +21,12 @@ typedef enum AppState {
 
 @interface MenuBarController : NSObject {
     CDModel* coreData;
+    Solver* solver;
 }
 @property (retain) IBOutlet MainView* mainView;
 @property (retain) IBOutlet NSProgressIndicator* progres;
-@property (retain) IBOutlet NSWindow* bCWindow;
+@property (retain) IBOutlet NSWindow* bC1Window;
+@property (retain) IBOutlet NSWindow* bC2Window;
 @property (retain) IBOutlet NSMenuItem* nodeItem;
 @property (retain) IBOutlet NSMenuItem* meshItem;
 @property (retain) IBOutlet NSMenuItem* bCItem;
@@ -40,11 +43,31 @@ typedef enum AppState {
 -(IBAction)addMash:(id)sender;
 -(IBAction)okMash:(id)sender;
 
--(IBAction)startAddingBC:(id)sender;
 -(IBAction)addBC1:(id)sender;
 -(IBAction)addBC2:(id)sender;
 -(IBAction)okBC:(id)sender;
 
+-(void) bc1:(NSPoint)pForBC1;
+
+-(void) bc2P1:(NSPoint)p1 
+           P2:(NSPoint)p2;
+
+
+
+
+
+
+@property (retain) IBOutlet NSTextField* nodeNameBC1TextField;
+@property (retain) IBOutlet NSTextField* temperatureValueBC1TextField;
+-(IBAction) okButtonBC1:(id)sender;
+-(IBAction) cancelButtonBC1:(id)sender;
+
+
+@property (retain) IBOutlet NSTextField* nodeName1BC2TextField;
+@property (retain) IBOutlet NSTextField* nodeName2BC2TextField;
+@property (retain) IBOutlet NSTextField* qValueBC2TextField;
+-(IBAction) okButtonBC2:(id)sender;
+-(IBAction) cancelButtonBC2:(id)sender;
 
 
 @end

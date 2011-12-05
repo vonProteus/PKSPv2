@@ -8,11 +8,13 @@
 
 #import "MainView.h"
 #import "PlistConf.h"
+#import "MenuBarController.h"
 
 @implementation MainView
 @synthesize mode;
 @synthesize rOfNode;
-@synthesize lastPoint;
+@synthesize lastPoint, bc2P1, bc2P2;
+@synthesize mbc;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -37,6 +39,7 @@
 
         coreData = [CDModel sharedModel];
         self.mode = nothing;
+        self.rOfNode = [[PlistConf valueForKey:@"rOfNode"] doubleValue];
     }
 //    [self makeCoordinateSistem];
     [self drawNodes];
@@ -58,7 +61,7 @@
     for (Nodes* n in [coreData allNodes]) {
         //        [n dlog];
         [self drawCirclePoint:[n pointValue]
-                            R:3 
+                            R:self.rOfNode
                     WithColor:rgba];
         
     }
@@ -154,7 +157,7 @@
                     step.x /= k;
                     step.y /= k;
                     
-                    for (NSUInteger a = 0; a < k; ++a) {
+                    for (NSUInteger a = 1; a < k; ++a) {
                         NSPoint tmpLocation = NSMakePoint(lastPoint.x - a*step.x, lastPoint.y - a*step.y);
                         Nodes *n;
                         n = [coreData addNewNode];
@@ -173,6 +176,21 @@
                 [self display];
             }
             break;
+            
+        case addingBC1:
+        {
+            [mbc bc1:location];
+        }
+            break;
+        case addingBC2:
+        {
+            if (bc2P1.x != 0 && bc2P1.y != 0) {
+                [mbc bc2P1:bc2P1 P2:location];
+            }
+            bc2P1 = location;
+        }
+            break;
+            
         default:
             break;
     }
