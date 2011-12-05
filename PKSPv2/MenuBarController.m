@@ -13,6 +13,12 @@
 @implementation MenuBarController
 @synthesize mainView;
 @synthesize bCWindow;
+@synthesize progres;
+@synthesize state;
+@synthesize nodeItem;
+@synthesize meshItem;
+@synthesize bCItem;
+@synthesize solverItem;
 
 -(id) init{
     {
@@ -30,6 +36,13 @@
     
     [PlistConf setValue:@"set" forKey:@"key"];
     
+    [bCWindow setIsVisible:NO];
+    [progres setHidden:YES];    
+    
+    [nodeItem setEnabled:YES];
+    [meshItem setEnabled:NO];
+    [bCItem setEnabled:NO];
+    [solverItem setEnabled:NO];
     return  self;
 }
 
@@ -37,16 +50,22 @@
     for (Nodes * n in [coreData allNodes]) {
         [coreData removeCDObiect:n];
     }
+    mainView.lastPoint = NSMakePoint(0, 0);
     mainView.mode = addingNodes;
     [mainView display];
 }
 
 -(IBAction)addNodes:(id)sender{
     mainView.mode = addingNodes;
+    [progres startAnimation:Nil];
 }
 
 -(IBAction)stopAddNodes:(id)sender{
     mainView.mode = nothing;
+    [progres stopAnimation:Nil];
+    [nodeItem setEnabled:NO];
+    [meshItem setEnabled:YES];
+    [bCItem setEnabled:NO];
 }
 
 
@@ -61,13 +80,22 @@
     mainView.mode = nothing;
     Mesh * mesh = [[Mesh alloc] init];
     mesh.bounds = mainView.bounds;
+    [progres setHidden:NO];
+    [progres startAnimation:Nil];
     [mesh go];
     [mainView display];
+    [progres setHidden:YES];
+    [progres stopAnimation:Nil];
+    
+}
+-(IBAction)okMash:(id)sender{
+    [meshItem setEnabled:NO];
+    [bCItem setEnabled:YES];
 }
 
 
 -(IBAction)startAddingBC:(id)sender{
-    bCWindow.isVisible = !bCWindow.isVisible;
+    
 }
 -(IBAction)addBC1:(id)sender{
     
@@ -76,6 +104,10 @@
     
 }
 
+-(IBAction)okBC:(id)sender{
+    [bCItem setEnabled:NO];
+    [solverItem setEnabled:YES];
+}
 
 
 @end

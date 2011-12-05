@@ -159,12 +159,13 @@
 
 -(void) bildElements{
     DelaunayTriangulation *triangulation = [DelaunayTriangulation triangulation];
-    
-    for (Nodes* n in [coreData allNodes]) {
+    NSArray* nodes = [coreData allNodes];
+    Nodes* n = nil;
+    for (NSUInteger a = 0; a < [nodes count]; ++a) {
+        n = (Nodes*)[nodes objectAtIndex:a];
         
         double x = [n.x doubleValue];
         double y = [n.y doubleValue];
-        [coreData removeCDObiect:n];
         
         DelaunayPoint *dP = [DelaunayPoint pointAtX:x 
                                                andY:y];
@@ -222,7 +223,8 @@
         if (pTest.x >= 40000 || pTest.x == 0 || pTest.y >= 40000 || pTest.y == 0) {
             continue;
         }
-        Nodes *n3 = [coreData getOrCreateNodeWithX:pTest.x andY:pTest.y];
+        Nodes *n3 = [coreData getOrCreateNodeWithX:pTest.x
+                                              andY:pTest.y];
         [n3 dlog];
         
         [[coreData makeElementFromNode1:n1 

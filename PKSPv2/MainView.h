@@ -18,9 +18,9 @@ typedef enum MainViewMode {
 
 @interface MainView : NSView{
     CDModel* coreData;
-    NSPoint lastPoint;
 }
 
+@property (assign) NSPoint lastPoint;
 @property (assign) MainViewMode mode;
 @property (assign) NSUInteger rOfNode;
 

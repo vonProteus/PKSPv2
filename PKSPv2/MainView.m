@@ -12,6 +12,7 @@
 @implementation MainView
 @synthesize mode;
 @synthesize rOfNode;
+@synthesize lastPoint;
 
 - (id)initWithFrame:(NSRect)frame
 {
