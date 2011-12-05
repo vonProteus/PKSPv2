@@ -268,4 +268,50 @@
     return nil;    
 
 }
+
+
+- (Nodes*) getOrCreateNodeWithX:(float)x 
+                           andY:(float)y{
+    NSManagedObjectContext *myManagedObjectContext = [[CDModel sharedModel] managedObjectContext];
+    
+    NSEntityDescription *nodes = [NSEntityDescription entityForName:@"Nodes" inManagedObjectContext:myManagedObjectContext];
+    NSFetchRequest *requestToNodes = [[NSFetchRequest alloc] init]; 
+    [requestToNodes setEntity:nodes]; 
+    NSPredicate *myNodeQuestion = [NSPredicate predicateWithFormat:@"x = %f && y = %f", x, y];
+    [requestToNodes setPredicate:myNodeQuestion];
+    
+//    DLog(@"pre out");
+    NSError *error = nil;  
+    NSMutableArray* output = [[myManagedObjectContext executeFetchRequest:requestToNodes error:&error] mutableCopy]; 
+//    DLog(@"post out");
+    
+    if(error == nil){
+        if ([output count] == 0) {
+            {
+                NSString* stringTMP = [NSString stringWithFormat:@"Twoze nod bo nie ma takiego\n"];
+                DLog(@"%@",stringTMP);
+            }
+            
+            Nodes* n = [self addNewNode];
+            n.x = [NSNumber numberWithFloat:x];
+            n.y = [NSNumber numberWithFloat:y];
+            return n;
+
+        }
+        return [output objectAtIndex:0];
+        
+        
+    } else {
+        {
+            NSString* stringTMP = [NSString stringWithFormat:@"error\n"];
+            DLog(@"%@",stringTMP);
+        }
+
+    }
+    
+    return nil;    
+
+    
+}
+
 @end

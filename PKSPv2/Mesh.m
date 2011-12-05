@@ -154,7 +154,74 @@
     DelaunayTriangulation *triangulation = [DelaunayTriangulation triangulation];
     
     for (Nodes* n in [coreData allNodes]) {
-        [triangulation addPoint:<#(DelaunayPoint *)#>]
+        
+        double x = [n.x doubleValue];
+        double y = [n.y doubleValue];
+        [coreData removeCDObiect:n];
+        
+        DelaunayPoint *dP = [DelaunayPoint pointAtX:x 
+                                               andY:y];
+        
+        [triangulation addPoint:dP];
+    }
+    
+    for (DelaunayTriangle* t in triangulation.triangles) {
+        NSUInteger a = 0;
+        
+        
+        DelaunayPoint *p1 = Nil;
+        DelaunayPoint *p2 = Nil;
+        DelaunayPoint *p3 = Nil;
+        DelaunayPoint *pTest = Nil;
+        
+        for (DelaunayPoint *pTmp in t.points) {
+            switch (a) {
+                case 0:
+                    p1 = pTmp;
+                    break;
+                case 1:
+                    p2 = pTmp;
+                    break;
+                case 2:
+                    p3 = pTmp;
+                    break;
+                default:
+                {
+                    NSString* stringTMP = [NSString stringWithFormat:@"coś nie tak\n"];
+                    DLog(@"%@",stringTMP);
+                }
+                    
+                    break;
+            }
+            ++a;
+        }
+        
+        pTest = p1;
+        if (pTest.x >= 40000 || pTest.x == 0 || pTest.y >= 40000 || pTest.y == 0) {
+            continue;
+        }
+        Nodes *n1 = [coreData getOrCreateNodeWithX:pTest.x andY:pTest.y];
+        [n1 dlog];
+        
+        
+        pTest = p2;
+        if (pTest.x >= 40000 || pTest.x == 0 || pTest.y >= 40000 || pTest.y == 0) {
+            continue;
+        }
+        Nodes *n2 = [coreData getOrCreateNodeWithX:pTest.x andY:pTest.y];
+        [n2 dlog];
+        
+        pTest = p3;
+        if (pTest.x >= 40000 || pTest.x == 0 || pTest.y >= 40000 || pTest.y == 0) {
+            continue;
+        }
+        Nodes *n3 = [coreData getOrCreateNodeWithX:pTest.x andY:pTest.y];
+        [n3 dlog];
+        
+        [[coreData makeElementFromNode1:n1 
+                                  Node2:n2 
+                                  Node3:n3] dlog];
+        [coreData saveCD];
     }
     
 }
