@@ -73,7 +73,7 @@
 
 -(void) go{
     
-    [self dlogPolygon];
+//    [self dlogPolygon];
     [self sizeMash];
     [self bildElements];
     [coreData saveCD];
@@ -148,8 +148,14 @@
             NSPoint p = NSMakePoint(x, y);
             
             if ([self pointIsInPolyhon:p]) {
-                Nodes* newNode = [coreData getOrCreateNodeWithX:x
-                                                           andY:y];
+                Nodes* newNode = [coreData getNodeWithX:x 
+                                                   andY:y 
+                                                    inR:[[PlistConf valueForKey:@"rOfNode"] doubleValue]*3];
+                if (newNode == Nil) {
+                    newNode = [coreData addNewNode];
+                    newNode.x = [NSNumber numberWithDouble:x];
+                    newNode.y = [NSNumber numberWithDouble:y];
+                }
             }
         }
     }

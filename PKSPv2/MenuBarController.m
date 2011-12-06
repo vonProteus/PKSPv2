@@ -60,21 +60,23 @@
         [coreData removeCDObiect:n];
     }
     self.mainView.lastPoint = NSMakePoint(0, 0);
-    self.mainView.mode = addingNodes;
+    self.mainView.startNode = NSMakePoint(0, 0);
     [self.mainView display];
+    
+    [self addNodes:nil];
 }
 
 -(IBAction)addNodes:(id)sender{
     self.mainView.mode = addingNodes;
-    [self.progres startAnimation:Nil];
+
 }
 
 -(IBAction)stopAddNodes:(id)sender{
     self.mainView.mode = nothing;
-    [self.progres stopAnimation:Nil];
     [self.nodeItem setEnabled:NO];
     [self.meshItem setEnabled:YES];
     [self.bCItem setEnabled:NO];
+    [self.mainView stopaAddingNodes];
 }
 
 

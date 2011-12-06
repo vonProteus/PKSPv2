@@ -7,6 +7,7 @@
 //
 
 #import "GlobalMatrix.h"
+#import "PlistConf.h"
 
 
 @implementation GlobalMatrix
@@ -43,8 +44,9 @@
 
 
 - (void) fillGlobalMatrix{
+    double K = [[PlistConf valueForKey:@"kValue"] doubleValue];
     for (Elements *e in [coreData allElements]) {
-        [e addSelfToGlobal:self andK:8];
+        [e addSelfToGlobal:self andK:K];
     }
     
 }

@@ -21,7 +21,7 @@ typedef enum MainViewMode {
     CDModel* coreData;
 }
 @property (retain) MenuBarController* mbc;
-@property (assign) NSPoint lastPoint, bc2P1, bc2P2;
+@property (assign) NSPoint lastPoint, bc2P1, bc2P2, startNode;
 @property (assign) MainViewMode mode;
 @property (assign) double rOfNode;
 
@@ -39,6 +39,8 @@ typedef enum MainViewMode {
 
 - (void)drawElement:(Elements*)elem 
           WithColor:(NSColor*) rgba;
+
+- (void) stopaAddingNodes; 
 
 
 @end

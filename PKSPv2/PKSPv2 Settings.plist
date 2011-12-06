@@ -16,5 +16,7 @@
 	<integer>3</integer>
 	<key>maxLenghtOfEadge</key>
 	<integer>43</integer>
+	<key>kValue</key>
+	<integer>8</integer>
 </dict>
 </plist>

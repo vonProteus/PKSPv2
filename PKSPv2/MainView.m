@@ -13,7 +13,7 @@
 @implementation MainView
 @synthesize mode;
 @synthesize rOfNode;
-@synthesize lastPoint, bc2P1, bc2P2;
+@synthesize lastPoint, bc2P1, bc2P2, startNode;
 @synthesize mbc;
 
 - (id)initWithFrame:(NSRect)frame
@@ -149,6 +149,9 @@
             
         case addingNodes:
             {
+                if ((startNode.x == 0 && startNode.y == 0)){
+                    startNode = lastPoint;
+                }
                 if (!(lastPoint.x == 0 && lastPoint.y == 0)) {
                     NSPoint delta = NSMakePoint(lastPoint.x - location.x, lastPoint.y - location.y);
                     double d = sqrt(delta.x*delta.x+ delta.y*delta.y);
@@ -160,16 +163,15 @@
                     for (NSUInteger a = 1; a < k; ++a) {
                         NSPoint tmpLocation = NSMakePoint(lastPoint.x - a*step.x, lastPoint.y - a*step.y);
                         Nodes *n;
-                        n = [coreData addNewNode];
-                        n.x = [NSNumber numberWithFloat:tmpLocation.x];
-                        n.y = [NSNumber numberWithFloat:tmpLocation.y];
+                        n = [coreData getOrCreateNodeWithX:tmpLocation.x 
+                                                      andY:tmpLocation.y];
+             
                     }
                 }
                 
                 Nodes *n;
-                n = [coreData addNewNode];
-                n.x = [NSNumber numberWithFloat:location.x];
-                n.y = [NSNumber numberWithFloat:location.y];
+                n = [coreData getOrCreateNodeWithX:location.x 
+                                              andY:location.y];
                 
                 [coreData saveCD];
                 lastPoint = location;
@@ -195,6 +197,37 @@
             break;
     }
   
+}
+
+-(void) stopaAddingNodes{
+    NSPoint location = self.startNode;
+    {
+        if (!(lastPoint.x == 0 && lastPoint.y == 0)) {
+            NSPoint delta = NSMakePoint(lastPoint.x - location.x, lastPoint.y - location.y);
+            double d = sqrt(delta.x*delta.x+ delta.y*delta.y);
+            NSUInteger k = (NSUInteger)(d/[[PlistConf valueForKey:@"spaceBetwenNodesOnEadge"] unsignedIntegerValue]);
+            NSPoint step = delta;
+            step.x /= k;
+            step.y /= k;
+            
+            for (NSUInteger a = 1; a < k; ++a) {
+                NSPoint tmpLocation = NSMakePoint(lastPoint.x - a*step.x, lastPoint.y - a*step.y);
+                Nodes *n;
+                n = [coreData getOrCreateNodeWithX:tmpLocation.x 
+                                              andY:tmpLocation.y];
+                
+            }
+        }
+        
+        Nodes *n;
+        n = [coreData getOrCreateNodeWithX:location.x 
+                                      andY:location.y];
+        
+        [coreData saveCD];
+        lastPoint = location;
+        [self display];
+    }
+    
 }
 
 
