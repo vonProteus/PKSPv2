@@ -148,9 +148,8 @@
             NSPoint p = NSMakePoint(x, y);
             
             if ([self pointIsInPolyhon:p]) {
-                Nodes* newNode = [coreData addNewNode];
-                newNode.x = [NSNumber numberWithDouble:x];
-                newNode.y = [NSNumber numberWithDouble:y];
+                Nodes* newNode = [coreData getOrCreateNodeWithX:x
+                                                           andY:y];
             }
         }
     }
@@ -202,14 +201,30 @@
                     break;
             }
             ++a;
+            
         }
+        
+        double maxLenghtOfEadge = [[PlistConf valueForKey:@"maxLenghtOfEadge"] doubleValue];
+        maxLenghtOfEadge *= maxLenghtOfEadge;
+        if ([self distanceFromP1:[p1 nsPointValue] toP2:[p2 nsPointValue]] >= maxLenghtOfEadge) {
+            continue;
+        }
+        
+        if ([self distanceFromP1:[p2 nsPointValue] toP2:[p3 nsPointValue]] >= maxLenghtOfEadge) {
+            continue;
+        }
+        
+        if ([self distanceFromP1:[p1 nsPointValue] toP2:[p3 nsPointValue]] >= maxLenghtOfEadge) {
+            continue;
+        }
+        
         
         pTest = p1;
         if (pTest.x >= 40000 || pTest.x == 0 || pTest.y >= 40000 || pTest.y == 0) {
             continue;
         }
         Nodes *n1 = [coreData getOrCreateNodeWithX:pTest.x andY:pTest.y];
-        [n1 dlog];
+//        [n1 dlog];
         
         
         pTest = p2;
@@ -217,7 +232,7 @@
             continue;
         }
         Nodes *n2 = [coreData getOrCreateNodeWithX:pTest.x andY:pTest.y];
-        [n2 dlog];
+//        [n2 dlog];
         
         pTest = p3;
         if (pTest.x >= 40000 || pTest.x == 0 || pTest.y >= 40000 || pTest.y == 0) {
@@ -225,11 +240,12 @@
         }
         Nodes *n3 = [coreData getOrCreateNodeWithX:pTest.x
                                               andY:pTest.y];
-        [n3 dlog];
+//        [n3 dlog];
         
-        [[coreData makeElementFromNode1:n1 
-                                  Node2:n2 
-                                  Node3:n3] dlog];
+        
+        [coreData makeElementFromNode1:n1 
+                                 Node2:n2 
+                                 Node3:n3];
         [coreData saveCD];
     }
     

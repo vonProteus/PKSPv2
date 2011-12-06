@@ -33,4 +33,6 @@
 
 - (void)printRecursive:(BOOL)recursive;
 
+-(NSPoint) nsPointValue;
+
 @end

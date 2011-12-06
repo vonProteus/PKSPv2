@@ -113,4 +113,8 @@
     }];
 }
 
+
+-(NSPoint) nsPointValue{
+    return NSMakePoint(self.x, self.y);
+}
 @end
