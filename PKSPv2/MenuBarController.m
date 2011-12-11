@@ -170,6 +170,9 @@
     if (n2 == nil) {
         return;
     }
+    if (n2 == n1) {
+        return;
+    }
     [n2 dlog];
     
     BOOL contains = NO;
@@ -188,7 +191,7 @@
     [self.bC2Window setIsVisible:YES];
     [self.nodeName1BC2TextField setStringValue:[n1.number stringValue]];
     [self.nodeName2BC2TextField setStringValue:[n2.number stringValue]];
-    [self.qValueBC2TextField setStringValue:@""];
+//    [self.qValueBC2TextField setStringValue:@""];
         
 }
 
