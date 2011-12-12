@@ -166,6 +166,9 @@
     DelaunayTriangulation *triangulation = [DelaunayTriangulation triangulation];
     NSArray* nodes = [coreData allNodes];
     Nodes* n = nil;
+    double maxLenghtOfEadge = [[PlistConf valueForKey:@"maxLenghtOfEadge"] doubleValue];
+    maxLenghtOfEadge *= maxLenghtOfEadge;
+
     for (NSUInteger a = 0; a < [nodes count]; ++a) {
         n = (Nodes*)[nodes objectAtIndex:a];
         
@@ -210,8 +213,7 @@
             
         }
         
-        double maxLenghtOfEadge = [[PlistConf valueForKey:@"maxLenghtOfEadge"] doubleValue];
-        maxLenghtOfEadge *= maxLenghtOfEadge;
+        
         if ([self distanceFromP1:[p1 nsPointValue] toP2:[p2 nsPointValue]] >= maxLenghtOfEadge) {
             continue;
         }
@@ -252,6 +254,12 @@
         [coreData makeElementFromNode1:n1 
                                  Node2:n2 
                                  Node3:n3];
+        {
+            NSString* stringTMP = [NSString stringWithFormat:@"dodano element\n"];
+            DLog(@"%@",stringTMP);
+        }
+
+        
         [coreData saveCD];
     }
     

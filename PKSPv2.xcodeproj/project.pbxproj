@@ -341,9 +341,9 @@
 		70D4720F148158A800DB9A77 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				70D47211148158C100DB9A77 /* CDModel.m */,
 				705438EE148180C0008C006E /* basic */,
 				70D47210148158C100DB9A77 /* CDModel.h */,
-				70D47211148158C100DB9A77 /* CDModel.m */,
 				70D471EC148157EB00DB9A77 /* PKSPv2.xcdatamodeld */,
 				705438F214818179008C006E /* Nodes+Metods.h */,
 				705438F314818179008C006E /* Nodes+Metods.m */,

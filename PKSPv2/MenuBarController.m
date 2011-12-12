@@ -61,6 +61,7 @@
     }
     self.mainView.lastPoint = NSMakePoint(0, 0);
     self.mainView.startNode = NSMakePoint(0, 0);
+    self.mainView.mode = addingNodes;
     [self.mainView display];
     
     [self addNodes:nil];
@@ -88,6 +89,7 @@
 }
 
 -(IBAction)addMash:(id)sender{
+    [self stopAddNodes:nil];
     self.mainView.mode = nothing;
     Mesh * mesh = [[Mesh alloc] init];
     mesh.bounds = mainView.bounds;
