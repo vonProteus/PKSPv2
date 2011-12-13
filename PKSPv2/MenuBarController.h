@@ -27,6 +27,7 @@ typedef enum AppState {
 @property (retain) IBOutlet NSProgressIndicator* progres;
 @property (retain) IBOutlet NSWindow* bC1Window;
 @property (retain) IBOutlet NSWindow* bC2Window;
+@property (retain) IBOutlet NSWindow* prefWindow;
 @property (retain) IBOutlet NSMenuItem* nodeItem;
 @property (retain) IBOutlet NSMenuItem* meshItem;
 @property (retain) IBOutlet NSMenuItem* bCItem;
@@ -37,6 +38,8 @@ typedef enum AppState {
 -(IBAction)cleanNodes:(id)sender;
 -(IBAction)addNodes:(id)sender;
 -(IBAction)stopAddNodes:(id)sender;
+
+-(IBAction)showPrefWindow:(id)sender;
 
 
 -(IBAction)cleanMash:(id)sender;
@@ -51,6 +54,7 @@ typedef enum AppState {
 
 -(void) bc2P1:(NSPoint)p1 
            P2:(NSPoint)p2;
+
 
 
 

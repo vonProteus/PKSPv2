@@ -25,6 +25,7 @@
 @synthesize nodeName1BC2TextField;
 @synthesize nodeName2BC2TextField;
 @synthesize qValueBC2TextField;
+@synthesize prefWindow;
 
 -(id) init{
     {
@@ -206,6 +207,10 @@
 -(IBAction) cancelButtonBC2:(id)sender{
 
     [self.bC2Window setIsVisible:NO];
+}
+
+-(IBAction)showPrefWindow:(id)sender{
+    [self.prefWindow setIsVisible:YES];
 }
 
 @end
