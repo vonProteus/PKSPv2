@@ -44,14 +44,14 @@
     
     self.mainView.rOfNode = [[PlistConf valueForKey:@"rOfNode"] doubleValue];
     
-    [self.bC1Window setIsVisible:NO];
-    [self.bC2Window setIsVisible:NO];
-    [self.progres setHidden:YES];    
+//    [self.bC1Window setIsVisible:NO];
+//    [self.bC2Window setIsVisible:NO];
+//    [self.progres setHidden:YES];    
     
-    [self.nodeItem setEnabled:YES];
-    [self.meshItem setEnabled:NO];
-    [self.bCItem setEnabled:NO];
-    [self.solverItem setEnabled:NO];
+//    [self.nodeItem setEnabled:YES];
+//    [self.meshItem setEnabled:NO];
+//    [self.bCItem setEnabled:NO];
+//    [self.solverItem setEnabled:NO];
     return  self;
 }
 
@@ -74,9 +74,6 @@
 
 -(IBAction)stopAddNodes:(id)sender{
     self.mainView.mode = nothing;
-    [self.nodeItem setEnabled:NO];
-    [self.meshItem setEnabled:YES];
-    [self.bCItem setEnabled:NO];
     [self.mainView stopaAddingNodes];
 }
 
@@ -93,21 +90,19 @@
     self.mainView.mode = nothing;
     Mesh * mesh = [[Mesh alloc] init];
     mesh.bounds = mainView.bounds;
-    [self.progres setHidden:NO];
     [self.progres startAnimation:Nil];
     [mesh go];
     [self.mainView display];
-    [self.progres setHidden:YES];
+
     [self.progres stopAnimation:Nil];
     
 }
 -(IBAction)okMash:(id)sender{
-    [self.progres setHidden:NO];
+
     [self.progres startAnimation:Nil];
-    [self.meshItem setEnabled:NO];
-    [self.bCItem setEnabled:YES];
+
     solver = [[Solver alloc] initWirhCDData];
-    [self.progres setHidden:YES];
+
     [self.progres stopAnimation:Nil];
 }
 
@@ -127,8 +122,6 @@
 }
 
 -(IBAction)okBC:(id)sender{
-    [self.bCItem setEnabled:NO];
-    [self.solverItem setEnabled:YES];
 }
 
 -(void) bc1:(NSPoint)pForBC1{
@@ -137,7 +130,7 @@
         return;
     }
     [n dlog];
-    [self.bCItem setEnabled:NO];
+
     self.mainView.mode = nothing;
     [self.bC1Window setIsVisible:YES];
     [self.nodeNameBC1TextField setStringValue:[n.number stringValue]];
@@ -150,12 +143,12 @@
         [solver addBC1ForNode:[[self.nodeNameBC1TextField stringValue] longLongValue]
                         value:[[self.temperatureValueBC1TextField stringValue] doubleValue]];
     }
-    [self.bCItem setEnabled:YES];
+
     [self.bC1Window setIsVisible:NO];
     
 }
 -(IBAction)cancelButtonBC1:(id)sender{
-    [self.bCItem setEnabled:YES];
+
     [self.bC1Window setIsVisible:NO];
 }
 
@@ -188,12 +181,12 @@
         return;
     }
 
-    [self.bCItem setEnabled:NO];
+
     self.mainView.mode = nothing;
     [self.bC2Window setIsVisible:YES];
     [self.nodeName1BC2TextField setStringValue:[n1.number stringValue]];
     [self.nodeName2BC2TextField setStringValue:[n2.number stringValue]];
-//    [self.qValueBC2TextField setStringValue:@""];
+
         
 }
 
@@ -205,13 +198,13 @@
                       andNode2:[[self.nodeName2BC2TextField stringValue] longLongValue]
                           qVal:[[self.qValueBC2TextField stringValue] doubleValue]];
     }
-    [self.bCItem setEnabled:YES];
+
     [self.bC2Window setIsVisible:NO];
     
 }
 
 -(IBAction) cancelButtonBC2:(id)sender{
-    [self.bCItem setEnabled:YES];
+
     [self.bC2Window setIsVisible:NO];
 }
 
