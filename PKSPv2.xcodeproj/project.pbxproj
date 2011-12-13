@@ -22,7 +22,6 @@
 		705438ED14817DD0008C006E /* GlobalMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 705438EC14817DD0008C006E /* GlobalMatrix.m */; };
 		705438F414818179008C006E /* Nodes+Metods.m in Sources */ = {isa = PBXBuildFile; fileRef = 705438F314818179008C006E /* Nodes+Metods.m */; };
 		705438F7148181B3008C006E /* Elements+Metods.m in Sources */ = {isa = PBXBuildFile; fileRef = 705438F6148181B3008C006E /* Elements+Metods.m */; };
-		7082016E1497A555005AD4F5 /* imp-triangle-drawing.png in Resources */ = {isa = PBXBuildFile; fileRef = 7082016D1497A555005AD4F5 /* imp-triangle-drawing.png */; };
 		708201711497A5E1005AD4F5 /* PKSP.icns in Resources */ = {isa = PBXBuildFile; fileRef = 708201701497A5E1005AD4F5 /* PKSP.icns */; };
 		70B12EB1148BCA5400DBA209 /* MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B12EB0148BCA5400DBA209 /* MainView.m */; };
 		70B12EB6148BCB4A00DBA209 /* MenuBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 70B12EB5148BCB4A00DBA209 /* MenuBarController.m */; };
@@ -83,7 +82,6 @@
 		705438F314818179008C006E /* Nodes+Metods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Nodes+Metods.m"; sourceTree = "<group>"; };
 		705438F5148181B3008C006E /* Elements+Metods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Elements+Metods.h"; sourceTree = "<group>"; };
 		705438F6148181B3008C006E /* Elements+Metods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Elements+Metods.m"; sourceTree = "<group>"; };
-		7082016D1497A555005AD4F5 /* imp-triangle-drawing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "imp-triangle-drawing.png"; sourceTree = "<group>"; };
 		708201701497A5E1005AD4F5 /* PKSP.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = PKSP.icns; sourceTree = "<group>"; };
 		70B12EAF148BCA5400DBA209 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
 		70B12EB0148BCA5400DBA209 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
@@ -258,7 +256,6 @@
 		70D471C5148157EA00DB9A77 = {
 			isa = PBXGroup;
 			children = (
-				7082016D1497A555005AD4F5 /* imp-triangle-drawing.png */,
 				702F0E621482AFED008B1171 /* README */,
 				70D471DA148157EA00DB9A77 /* PKSPv2 */,
 				70D471FA148157EC00DB9A77 /* PKSPv2Tests */,
@@ -446,7 +443,6 @@
 				703AEF3D14815DF0003FE12E /* Tmp.xib in Resources */,
 				702F0E631482AFED008B1171 /* README in Resources */,
 				70BBCAB5148D1E1900686919 /* PKSPv2 Settings.plist in Resources */,
-				7082016E1497A555005AD4F5 /* imp-triangle-drawing.png in Resources */,
 				708201711497A5E1005AD4F5 /* PKSP.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
