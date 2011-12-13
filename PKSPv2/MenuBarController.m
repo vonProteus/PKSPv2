@@ -26,6 +26,13 @@
 @synthesize nodeName2BC2TextField;
 @synthesize qValueBC2TextField;
 @synthesize prefWindow;
+@synthesize numberOfPointsToAddTextField;
+@synthesize nodeSizeXTextField;
+@synthesize nodeSizeYTextField;
+@synthesize spaceBetwenNodesOnEadgeTextField;
+@synthesize rOfNodeTextField;
+@synthesize maxLenghtOfEadgeTextField;
+@synthesize kValueTextField;
 
 -(id) init{
     {
@@ -96,6 +103,8 @@
     [self.mainView display];
 
     [self.progres stopAnimation:Nil];
+    
+    [self okMash:nil];
     
 }
 -(IBAction)okMash:(id)sender{
@@ -210,7 +219,81 @@
 }
 
 -(IBAction)showPrefWindow:(id)sender{
+    [self.numberOfPointsToAddTextField setStringValue:[[PlistConf valueForKey:@"numberOfPointsToAdd"] stringValue]];
+    [self.nodeSizeXTextField setStringValue:[[PlistConf valueForKey:@"nodeSizeX"] stringValue]];
+    [self.nodeSizeYTextField setStringValue:[[PlistConf valueForKey:@"nodeSizeY"] stringValue]];
+    [self.spaceBetwenNodesOnEadgeTextField setStringValue:[[PlistConf valueForKey:@"spaceBetwenNodesOnEadge"] stringValue]];
+    [self.rOfNodeTextField setStringValue:[[PlistConf valueForKey:@"rOfNode"] stringValue]];
+    [self.maxLenghtOfEadgeTextField setStringValue:[[PlistConf valueForKey:@"maxLenghtOfEadge"] stringValue]];
+    [self.kValueTextField setStringValue:[[PlistConf valueForKey:@"kValue"] stringValue]];
+        
     [self.prefWindow setIsVisible:YES];
+}
+-(IBAction)savePref:(id)sender{
+    NSScanner* scanner;
+    NSNumber* number;
+    NSInteger nsi = 0;
+    double d = 0;
+    scanner = [NSScanner scannerWithString:[[[self.numberOfPointsToAddTextField stringValue] componentsSeparatedByCharactersInSet: [NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""]];
+
+    [scanner scanInteger:&nsi];
+    number = [NSNumber numberWithInteger:nsi];
+    [PlistConf setValue:number forKey:@"numberOfPointsToAdd"];
+    
+    
+    
+     scanner = [NSScanner scannerWithString:[[[self.nodeSizeXTextField stringValue] componentsSeparatedByCharactersInSet: [NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""]];
+    
+    [scanner scanInteger:&nsi];
+    number = [NSNumber numberWithInteger:nsi];
+    [PlistConf setValue:number forKey:@"nodeSizeX"];
+    
+    
+     scanner = [NSScanner scannerWithString:[[[self.nodeSizeYTextField stringValue] componentsSeparatedByCharactersInSet: [NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""]];
+    
+    [scanner scanInteger:&nsi];
+    number = [NSNumber numberWithInteger:nsi];
+    [PlistConf setValue:number forKey:@"nodeSizeY"];
+    
+    
+    
+     scanner = [NSScanner scannerWithString:[[[self.spaceBetwenNodesOnEadgeTextField stringValue] componentsSeparatedByCharactersInSet: [NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""]];
+    
+    [scanner scanInteger:&nsi];
+    number = [NSNumber numberWithInteger:nsi];
+    [PlistConf setValue:number forKey:@"spaceBetwenNodesOnEadge"];
+    
+    
+    
+     scanner = [NSScanner scannerWithString:[[[self.rOfNodeTextField stringValue] componentsSeparatedByCharactersInSet: [NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""]];
+    
+    [scanner scanDouble:&d];
+    number = [NSNumber numberWithDouble:d];
+    [PlistConf setValue:number forKey:@"rOfNode"];
+    
+    
+    
+     scanner = [NSScanner scannerWithString:[[[self.maxLenghtOfEadgeTextField stringValue] componentsSeparatedByCharactersInSet: [NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""]];
+    
+    [scanner scanDouble:&d];
+    number = [NSNumber numberWithDouble:d];
+    [PlistConf setValue:number forKey:@"maxLenghtOfEadge"];
+    
+    
+    
+    
+     scanner = [NSScanner scannerWithString:[[[self.kValueTextField stringValue] componentsSeparatedByCharactersInSet: [NSCharacterSet whitespaceCharacterSet]] componentsJoinedByString: @""]];
+    
+    [scanner scanDouble:&d];
+    number = [NSNumber numberWithDouble:d];
+    [PlistConf setValue:number forKey:@"kValue"];
+    
+       
+    
+    [self closePref:nil];
+}
+-(IBAction)closePref:(id)sender{
+    [self.prefWindow setIsVisible:NO];
 }
 
 @end
