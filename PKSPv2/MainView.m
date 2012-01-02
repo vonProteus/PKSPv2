@@ -42,6 +42,20 @@
         self.rOfNode = [[PlistConf valueForKey:@"rOfNode"] doubleValue];
     }
 //    [self makeCoordinateSistem];
+    if (self.mode == showResults) {
+        tempMax = DBL_MIN;
+        tempMin = DBL_MAX;
+        
+        for (Nodes* n in [coreData allNodes]) {
+            if ([n.temp doubleValue] > tempMax) {
+                tempMax = [n.temp doubleValue];
+            }
+            if ([n.temp doubleValue] < tempMin) {
+                tempMin = [n.temp doubleValue];
+            }
+        }
+    }
+    
     [self drawNodes];
     [self drawElemenys];
 }
@@ -50,6 +64,9 @@
     NSColor* rgba;
     
     switch (self.mode) {
+        showResults:
+            rgba = [NSColor whiteColor];
+            break;
         default:
             rgba = [NSColor blackColor];
             break;
@@ -93,16 +110,23 @@
     NSColor* rgba;
     
     switch (self.mode) {
+        showResults:
+            rgba = [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:1];
+            for (Elements* e in [coreData allElements]) {
+                [self drawElement:e WithColor:rgba];
+            }
+            break;
+            
         default:
             rgba = [NSColor greenColor];
+            for (Elements* e in [coreData allElements]) {
+                [self drawElement:e WithColor:rgba];
+            }
             break;
     }
     
     
-    for (Elements* e in [coreData allElements]) {
-        [self drawElement:e WithColor:rgba];
-    }
-    
+     
 }
 
 -(void) drawElement:(Elements *)elem WithColor:(NSColor *)rgba{
@@ -113,29 +137,98 @@
             p1 = [elem.n1 pointValue];
             p2 = [elem.n2 pointValue];
             p3 = [elem.n3 pointValue];
+            [path moveToPoint:p1];  
+            
+            //1-2
+            [path lineToPoint:p2];
+            
+            //2-3
+            [path lineToPoint:p3];
+            
+            //3-1
+            [path lineToPoint:p1];
+            
+            [rgba set];
+            [path stroke];
+
             break;
     }
     
     
-    [path moveToPoint:p1];  
-    
-    //1-2
-    [path lineToPoint:p2];
-    
-    //2-3
-    [path lineToPoint:p3];
-    
-    //3-1
-    [path lineToPoint:p1];
-    
-    [rgba set];
-    [path stroke];
-    [[NSColor colorWithDeviceRed:(arc4random()%255)/255.0 
-                           green:(arc4random()%255)/255.0  
-                            blue:(arc4random()%255)/255.0 
-                           alpha:0.2] setFill];
-    [path fill];
+       
+    NSPoint minPoint = NSMakePoint(p1.x, p1.y);
+    NSPoint maxPoint = NSMakePoint(p1.x, p1.y);
 
+    switch (self.mode) {
+        case showResults:
+       
+            if (minPoint.x > p2.x) {
+                minPoint.x = p2.x;
+            }
+            if (minPoint.x > p3.x) {
+                minPoint.x = p3.x;
+            }
+
+            if (minPoint.y > p2.y) {
+                minPoint.y = p2.y;
+            }
+            if (minPoint.y > p3.y) {
+                minPoint.y = p3.y;
+            }
+            
+            if (maxPoint.x < p2.x) {
+                maxPoint.x = p2.x;
+            }
+            if (maxPoint.x < p3.x) {
+                maxPoint.x = p3.x;
+            }
+            
+            if (maxPoint.y < p2.y) {
+                maxPoint.y = p2.y;
+            }
+            if (maxPoint.y < p3.y) {
+                maxPoint.y = p3.y;
+            }
+            
+            for (int a = (int)minPoint.x; a <= (int)maxPoint.x; ++a) {
+                for (int b = (int)minPoint.y; b <= (int)maxPoint.y; ++b) {
+//                    {
+//                        NSString* stringTMP = [NSString stringWithFormat:@"drawTemp\n"];
+//                        DLog(@"%@",stringTMP);
+//                    }
+
+                    NSPoint tmpAB = NSMakePoint(a, b);
+//                    {
+//                        NSString* stringTMP = [NSString stringWithFormat:@"x: %f, y: %f\n", tmpAB.x, tmpAB.y];
+//                        DLog(@"%@",stringTMP);
+//                    }
+
+                    double tempAB = [elem getTempAtPoint:tmpAB];
+                    if (tempAB != 0) {
+                        double tempValColor = (tempAB-tempMin)/(tempMax-tempMin);
+                        [self drawCirclePoint:tmpAB
+                                            R:1
+                                    WithColor:[NSColor colorWithDeviceHue:tempValColor
+                                                               saturation:1
+                                                               brightness:1 
+                                                                    alpha:0.1]];
+                        
+                    }
+                }
+            }
+
+            
+            break;
+            
+        default:
+            [[NSColor colorWithDeviceRed:(arc4random()%255)/255.0 
+                                   green:(arc4random()%255)/255.0  
+                                    blue:(arc4random()%255)/255.0 
+                                   alpha:0.2] setFill];
+            [path fill];
+            break;
+    }
+   
     
     
 }

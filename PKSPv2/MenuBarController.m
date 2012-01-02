@@ -153,7 +153,12 @@
     if ([self.temperatureValueBC1TextField stringValue] != @"") {
         [solver addBC1ForNode:[[self.nodeNameBC1TextField stringValue] longLongValue]
                         value:[[self.temperatureValueBC1TextField stringValue] doubleValue]];
+        Nodes* n = [coreData getNodeWithNumber:[[self.nodeNameBC1TextField stringValue] longLongValue]];
+        n.temp = [NSNumber numberWithDouble:[[self.temperatureValueBC1TextField stringValue] doubleValue]];
+        [coreData saveCD];
+//        [solver dlogMatrix];
     }
+    
 
     [self.bC1Window setIsVisible:NO];
     
@@ -295,6 +300,18 @@
 }
 -(IBAction)closePref:(id)sender{
     [self.prefWindow setIsVisible:NO];
+}
+
+-(IBAction)goSolver:(id)sender{
+//    [self okMash:nil];
+    [self.progres startAnimation:nil];
+    
+    self.mainView.mode = showResults;
+    [self.mainView display];
+    [solver solve];
+    
+    
+    [self.progres stopAnimation:nil];
 }
 
 @end

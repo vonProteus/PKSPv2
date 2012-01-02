@@ -14,11 +14,14 @@ typedef enum MainViewMode {
     nothing,
     addingNodes,
     addingBC1,
-    addingBC2
+    addingBC2,
+    showResults
 }MainViewMode;
 
 @interface MainView : NSView{
     CDModel* coreData;
+    double tempMax;
+    double tempMin;
 }
 @property (retain) MenuBarController* mbc;
 @property (assign) NSPoint lastPoint, bc2P1, bc2P2, startNode;

@@ -90,5 +90,73 @@
 }
 
 
+-(double) getTempAtPoint:(NSPoint)p{
+    double result = 0;
+    if ([self pointIsInPolyhon:p]) {
+        NSPoint i = [self.n1 pointValue];
+        NSPoint j = [self.n2 pointValue];
+        NSPoint k = [self.n3 pointValue];
+        
+        double ai = j.x*k.y - k.x*j.y;
+        double bi = j.y - k.y;
+        double ci = k.x -j.x;
+        
+        double aj = k.x*i.y - k.x*i.y;
+        double bj = k.y - i.y;
+        double cj = i.x - k.x;
+        
+        double ak = i.x*j.y - i.x*j.y;
+        double bk = i.y - j.y;
+        double ck = j.x -i.x;
+        
+        double a2 = j.x*k.y + i.x*j.y + k.x*i.y - j.x*i.y - k.x*j.y - i.x*k.y;
+        
+        double Ni = 1/a2*(ai + bi*p.x + ci*p.y);
+        double Nj = 1/a2*(aj + bj*p.x + cj*p.y);
+        double Nk = 1/a2*(ak + bk*p.x + ck*p.y);
+        
+        result = [self.n1.temp doubleValue]*Ni + [self.n2.temp doubleValue]*Nj + [self.n3.temp doubleValue]*Nk;
+        
+    }
+    return result;
+}
+
+
+
+-(BOOL) pointIsInPolyhon:(NSPoint) p{
+    
+    NSUInteger counter = 0;
+    NSUInteger i;
+    double xinters;
+    NSPoint* polygon = (NSPoint *) calloc(3, sizeof(NSPoint));
+    polygon[0] = [self.n1 pointValue];
+    polygon[1] = [self.n2 pointValue];
+    polygon[2] = [self.n3 pointValue];
+    NSPoint p1,p2;
+    NSUInteger n = 3;
+    
+    p1 = polygon[0];
+    for (i=1;i<=n;i++) {
+        p2 = polygon[i % n];
+        if (p.y > MIN(p1.y,p2.y)) {
+            if (p.y <= MAX(p1.y,p2.y)) {
+                if (p.x <= MAX(p1.x,p2.x)) {
+                    if (p1.y != p2.y) {
+                        xinters = (p.y-p1.y)*(p2.x-p1.x)/(p2.y-p1.y)+p1.x;
+                        if (p1.x == p2.x || p.x <= xinters)
+                            counter++;
+                    }
+                }
+            }
+        }
+        p1 = p2;
+    }
+    
+    if (counter % 2 == 0)
+        return NO;
+    else
+        return YES;
+    
+}
 
 @end

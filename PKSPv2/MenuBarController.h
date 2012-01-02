@@ -48,6 +48,8 @@ typedef enum AppState {
 -(IBAction)addBC2:(id)sender;
 -(IBAction)okBC:(id)sender;
 
+-(IBAction)goSolver:(id)sender;
+
 
 
 @property (retain) IBOutlet NSWindow* prefWindow;

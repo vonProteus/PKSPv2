@@ -17,5 +17,7 @@
 
 -(void) addSelfToGlobal:(GlobalMatrix*)ThisMatrix 
                    andK:(double)k;
+-(double) getTempAtPoint:(NSPoint)p;
+-(BOOL) pointIsInPolyhon:(NSPoint)p;
 
 @end
