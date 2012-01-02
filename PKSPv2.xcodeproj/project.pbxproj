@@ -377,6 +377,7 @@
 				70D471CC148157EA00DB9A77 /* Sources */,
 				70D471CD148157EA00DB9A77 /* Frameworks */,
 				70D471CE148157EA00DB9A77 /* Resources */,
+				70EDAAC014B1EE1E003CA18F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -470,6 +471,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		70EDAAC014B1EE1E003CA18F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/ruby;
+			shellScript = "#/usr/bin/ruby\ndef get_file_as_string(filename)\ndata = ''\nf = File.open(filename, \"r\") \nf.each_line do |line|\ndata += line\nend\nreturn data\nend\n\ndef increment_version\nproject_dir = ENV['PROJECT_DIR']\nplist_file = ENV['INFOPLIST_FILE']\nplist_filename = \"#{project_dir}/#{plist_file}\"     \n\nplist_string = get_file_as_string(plist_file)\n\nstart_of_key = plist_string.index(\"CFBundleVersion\")\nstart_of_value = plist_string.index(\"<string>\", start_of_key) + \"<string>\".length\nend_of_value = plist_string.index(\"</string>\", start_of_value)\nold_value = plist_string[start_of_value, end_of_value - start_of_value]\n\nprint \"Old version for CFBundleVersion: \" + old_value + \"\\n\"\nprint old_value.class.to_s + \"\\n\"\nold_value_int = old_value.to_i\nprint old_value_int.class.to_s + \"\\n\"  \nnum_tab = old_value.split('.').reverse\nrest_value = -1\nnew_values = []\nold_value.split('.').reverse.each { |x| \n    num_value = 0\n    if rest_value == -1\n    num_value = x.to_i + 1 \n    else\n    num_value = rest_value + x.to_i\n    end\n    \n    # we allow only 3 digits per segment x\n    if num_value > 999\n    num_value = 0;\n    rest_value = 1;      \n    else\n    rest_value = 0\n    end   \n    \n    new_values << num_value.to_s\n}\n\nputs new_values.reverse\n\nnew_value = new_values.reverse.join('.')\nnew_key = \"<string>#{new_value}</string>\"\nplist_string = \"#{plist_string[0, start_of_value - '<string>'.length]}#{new_key}#{plist_string[end_of_value + '</string>'.length, plist_string.length - (end_of_value+1)]}\"\nFile.open(plist_file, 'w') {|f| f.write(plist_string) }\nend                                                \n\nincrement_version";
 		};
 /* End PBXShellScriptBuildPhase section */
 

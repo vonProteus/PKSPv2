@@ -202,6 +202,11 @@
 -(void) stopaAddingNodes{
     NSPoint location = self.startNode;
     {
+        NSString* stringTMP = [NSString stringWithFormat:@"jest\n"];
+        DLog(@"%@",stringTMP);
+    }
+
+    {
         if (!(lastPoint.x == 0 && lastPoint.y == 0)) {
             NSPoint delta = NSMakePoint(lastPoint.x - location.x, lastPoint.y - location.y);
             double d = sqrt(delta.x*delta.x+ delta.y*delta.y);
@@ -226,6 +231,8 @@
         [coreData saveCD];
         lastPoint = location;
         [self display];
+        self.lastPoint = NSMakePoint(0, 0);
+        self.startNode = NSMakePoint(0, 0);
     }
     
 }

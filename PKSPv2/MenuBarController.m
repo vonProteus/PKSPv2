@@ -76,13 +76,14 @@
 }
 
 -(IBAction)addNodes:(id)sender{
+    [self stopAddNodes:nil];
     self.mainView.mode = addingNodes;
 
 }
 
 -(IBAction)stopAddNodes:(id)sender{
-    self.mainView.mode = nothing;
     [self.mainView stopaAddingNodes];
+    self.mainView.mode = nothing;
 }
 
 
