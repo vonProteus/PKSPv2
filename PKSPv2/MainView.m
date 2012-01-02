@@ -47,6 +47,9 @@
         tempMin = DBL_MAX;
         
         for (Nodes* n in [coreData allNodes]) {
+            if ([n.temp doubleValue] == 0) {
+                continue;
+            }
             if ([n.temp doubleValue] > tempMax) {
                 tempMax = [n.temp doubleValue];
             }
@@ -54,6 +57,11 @@
                 tempMin = [n.temp doubleValue];
             }
         }
+        {
+            NSString* stringTMP = [NSString stringWithFormat:@"max %f min %f\n", tempMax, tempMin];
+            DLog(@"%@",stringTMP);
+        }
+
     }
     
     [self drawNodes];
@@ -204,14 +212,29 @@
 //                    }
 
                     double tempAB = [elem getTempAtPoint:tmpAB];
+//                    {
+//                        NSString* stringTMP = [NSString stringWithFormat:@"temp %f\n",tempAB];
+//                        DLog(@"%@",stringTMP);
+//                    }
+
                     if (tempAB != 0) {
-                        double tempValColor = (tempAB-tempMin)/(tempMax-tempMin);
-                        [self drawCirclePoint:tmpAB
-                                            R:1
-                                    WithColor:[NSColor colorWithDeviceHue:tempValColor
-                                                               saturation:1
-                                                               brightness:1 
-                                                                    alpha:0.1]];
+                        double tempValColor = ((tempAB-tempMin)/(tempMax-tempMin))*(240.0/360.0);
+                        {
+                            NSString* stringTMP = [NSString stringWithFormat:@"H %f\n", tempValColor];
+//                            if ((tempValColor >= 0.0 && tempValColor <=1.0)) {
+//                                DLog(@"%@",stringTMP);
+                                //                                [elem dlog];
+                                [self drawCirclePoint:tmpAB
+                                                    R:1
+                                            WithColor:[NSColor colorWithDeviceHue:tempValColor
+                                                                       saturation:1
+                                                                       brightness:1 
+                                                                            alpha:1]];
+                                
+//                            }
+                        }
+
+                        
                         
                     }
                 }

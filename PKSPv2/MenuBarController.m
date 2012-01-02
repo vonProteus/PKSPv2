@@ -161,6 +161,7 @@
     
 
     [self.bC1Window setIsVisible:NO];
+    [self addBC1:nil];
     
 }
 -(IBAction)cancelButtonBC1:(id)sender{

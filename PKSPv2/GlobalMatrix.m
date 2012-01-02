@@ -9,6 +9,17 @@
 #import "GlobalMatrix.h"
 #import "PlistConf.h"
 
+void outMatrix(double **matrix, NSInteger n, NSInteger m){
+    printf("--------\n");
+    for (int i = 0; i < m; ++i) {
+        for (int j = 0; j < n; ++j) {
+            printf("%4.2 6f ",matrix[i][j]);
+        }
+         printf("\n");
+    }    
+    printf("--------\n");
+}
+
 
 @implementation GlobalMatrix
 
@@ -395,6 +406,8 @@
 	i = 0;
 	j = 0;
 	
+    outMatrix(matrix,n,m);
+    
 	// dol po klancu
 	while( i < m && j < n) {
 		NSInteger maxI = i;
@@ -429,6 +442,7 @@
 		}
 		j++;
 	}
+//    outMatrix(matrix,n,m);
 	//gor po hribu
 	i = m - 1;
 	j = n - 2;
@@ -470,7 +484,7 @@
 	}
 	
     
-	
+	outMatrix(matrix,n,m);
 	DLog(@"@ packing");
 	//pakiranje veselih rezulatov
 	NSNumber *value;// = [[NSNumber alloc] init];
@@ -495,6 +509,8 @@
 	free(matrix);
 
 }
+
+
 
 -(NSUInteger) getNodeNumberFromRealX:(NSUInteger)X{
     return [[HXNamesRevers objectForKey:[[NSNumber numberWithUnsignedInteger:X] stringValue]] unsignedIntegerValue];
