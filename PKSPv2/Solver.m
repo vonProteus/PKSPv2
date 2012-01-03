@@ -25,7 +25,7 @@
 }
 
 -(void) solve{
-    [matrix gauss2];
+    [matrix gauss3];
 }
 
 -(void) dlogMatrix{

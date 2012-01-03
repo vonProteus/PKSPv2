@@ -19,6 +19,13 @@ void outMatrix(double **matrix, NSInteger n, NSInteger m){
     }    
     printf("--------\n");
 }
+void outVect(double *Vect, NSInteger n){
+    printf("--------\n");
+    for (int j = 0; j < n; ++j) {
+        printf("%4.2 6f ",Vect[j]);
+    }
+    printf("\n--------\n");
+}
 
 
 @implementation GlobalMatrix
@@ -514,6 +521,120 @@ void outMatrix(double **matrix, NSInteger n, NSInteger m){
 
 -(NSUInteger) getNodeNumberFromRealX:(NSUInteger)X{
     return [[HXNamesRevers objectForKey:[[NSNumber numberWithUnsignedInteger:X] stringValue]] unsignedIntegerValue];
+}
+
+-(void) gauss3{
+    NSInteger m = [H count];
+	NSInteger n = [[H objectAtIndex:0]  count];
+	
+    //	NSEnumerator *enumeratorNeznanke;
+	NSNumber *vrednost;
+    
+	NSInteger i,j;
+	//float matrix[m][n];
+	double **matrix;
+    double *b;
+	matrix = (double **) calloc(m, sizeof(double *));
+    b = (double*)calloc(m, sizeof(double));
+	for(i = 0; i < m; i++) 
+		matrix[i] = (double *) calloc(n-1, sizeof(double));
+	
+	for(i = 0; i < m; i++){
+		for(j = 0; j < n-1; j++) {
+            vrednost = [[H objectAtIndex:i] objectAtIndex:j];
+			matrix[i][j] = [vrednost doubleValue];
+            b[i] = [[[H objectAtIndex:i] objectAtIndex:n-1] doubleValue];
+		}
+	}
+	
+//    outMatrix(matrix,m,m);
+//    outVect(b, m);
+    
+    // epsilon równy 1^(-10)
+    double EPSILON = 1e-10;
+    
+    // zmienne pomocnicze (jako lokalne w celu mikrooptymalizacji)
+    double diagValue, alpha, sum;
+    
+    
+    // indeks wiersza z pivotem
+    int max;
+    
+    // przechodzimy przez wszystkie kolumny
+    for (int p = 0; p < m; p++) {
+        
+        // szukamy pivotu
+        max = p;
+        for (int r = p + 1; r < m; r++) {
+            if (abs(matrix[r][p]) > abs(matrix[max][p])) {
+                max = r;
+            }
+        }
+        
+        // zamieniamy wiersze p oraz maxi miejscami
+        if (p != max) {
+            double *temp = matrix[p];
+            matrix[p] = matrix[max];
+            matrix[max] = temp;
+            double t = b[p];
+            b[p] = b[max];
+            b[max] = t;
+        }
+        
+        // dzielimy cały wiersz przez wartość na diagonali
+        diagValue = matrix[p][p];
+        for (int c = 0; c < m; c++) {
+            matrix[p][c] /= diagValue;
+        }
+        b[p] /= diagValue;
+        
+        // jeśli macierz osobliwa (lub prawie), to kończy
+        if (abs(matrix[p][p]) <= EPSILON) {
+            // TODO obsłużyć ten wyjątek?
+//            throw new RuntimeException("Macierz (prawie) osobliwa");
+            {
+                NSString* stringTMP = [NSString stringWithFormat:@"Macierz (prawie) osobliwa\n"];
+                DLog(@"%@",stringTMP);
+            }
+
+        }
+        
+        // odejmujemy nasz wiersz od pozostałych po nim
+        for (int r = p + 1; r < m; r++) {
+            alpha = matrix[r][p] / matrix[p][p];
+            for (int c = p; c < m; c++) {
+                matrix[r][c] -= alpha * matrix[p][c];
+            }
+            b[r] -= alpha * b[p];
+        }
+    }
+    
+    // back substitution
+    for (NSInteger r = m - 1; r >= 0; r--) {
+        sum = 0;
+        for (NSInteger c = r + 1; c < m; c++) {
+            sum += matrix[r][c] * b[c];
+        }
+        b[r] = (b[r] - sum) / matrix[r][r];
+    }
+    
+//    outMatrix(matrix,m,m);
+//    outVect(b, m);
+    
+    DLog(@"@ packing");
+	//pakiranje veselih rezulatov
+	NSNumber *value;// = [[NSNumber alloc] init];
+    NSUInteger nodeNumber = 0;
+	for(i = 0; i < m; i++) {
+		value = [NSNumber numberWithFloat:b[i]];
+        nodeNumber = [self getNodeNumberFromRealX:i];
+		DLog(@"Value of node %ld is: %@, matrix = %f", nodeNumber, value, b[i]);
+        Nodes* n = [coreData getNodeWithNumber:nodeNumber];
+        n.temp = value;
+    }
+    [coreData saveCD];
+	free(matrix);
+    
 }
 
 @end

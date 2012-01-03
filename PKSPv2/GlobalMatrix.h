@@ -66,6 +66,7 @@
 
 - (void) gauss;
 - (void) gauss2;
+- (void) gauss3;
 
 -(NSUInteger) getNodeNumberFromRealX:(NSUInteger)X;
 
