@@ -70,6 +70,7 @@
     self.mainView.lastPoint = NSMakePoint(0, 0);
     self.mainView.startNode = NSMakePoint(0, 0);
     self.mainView.mode = addingNodes;
+    [self.mainView clean];
     [self.mainView display];
     
     [self addNodes:nil];
@@ -310,8 +311,8 @@
     self.mainView.mode = showResults;
     [self.mainView display];
     [solver solve];
-    
-    
+//    [self.mainView display];
+    [self.mainView drawElemenysNOW];
     [self.progres stopAnimation:nil];
 }
 

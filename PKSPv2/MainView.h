@@ -22,10 +22,11 @@ typedef enum MainViewMode {
     CDModel* coreData;
     double tempMax;
     double tempMin;
+    CFMutableDataRef bitmapData;
 }
-@property (retain) MenuBarController* mbc;
+@property (nonatomic, retain) MenuBarController* mbc;
 @property (assign) NSPoint lastPoint, bc2P1, bc2P2, startNode;
-@property (assign) MainViewMode mode;
+@property (nonatomic, readwrite) MainViewMode mode;
 @property (assign) double rOfNode;
 
 - (void)drawNodes;
@@ -45,5 +46,10 @@ typedef enum MainViewMode {
 
 - (void) stopaAddingNodes; 
 
+-(void) drawElementWithTemp:(Elements *)elem;
+-(NSImage*) createNSImageWithMesh;
+@property (nonatomic,retain) IBOutlet NSImageView *ViewImage; 
+-(void) drawElemenysNOW;
+-(void) clean;
 
 @end

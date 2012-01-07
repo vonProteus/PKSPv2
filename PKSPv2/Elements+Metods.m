@@ -6,9 +6,10 @@
 //  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "CDModel.h"
 #import "Elements+Metods.h"
 #import "GlobalMatrix.h"
-#import "CDModel.h"
+
 
 @implementation Elements (Metods)
 
@@ -198,5 +199,52 @@
         return YES;
     
 }
+
+
+-(NSPoint) getMinValueOfXY{
+    NSPoint min = [self.n1 pointValue];
+    NSPoint p2 = [self.n2 pointValue];
+    NSPoint p3 = [self.n3 pointValue];
+    
+    if (min.x > p2.x) {
+        min.x = p2.x;
+    }
+    if (min.x > p3.x) {
+        min.x = p3.x;
+    }
+    
+    if (min.y > p2.y) {
+        min.y = p2.y;
+    }
+    if (min.y > p3.y) {
+        min.y = p3.y;
+    }
+    
+    return min;
+}
+-(NSPoint) getMaxValueOfXY{
+    NSPoint max = [self.n1 pointValue];
+    NSPoint p2 = [self.n2 pointValue];
+    NSPoint p3 = [self.n3 pointValue];
+    
+    if (max.x < p2.x) {
+        max.x = p2.x;
+    }
+    if (max.x < p3.x) {
+        max.x = p3.x;
+    }
+    
+    if (max.y < p2.y) {
+        max.y = p2.y;
+    }
+    if (max.y < p3.y) {
+        max.y = p3.y;
+    }
+    
+    
+    return max;
+    
+}
+
 
 @end

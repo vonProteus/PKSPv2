@@ -15,6 +15,7 @@
 @synthesize rOfNode;
 @synthesize lastPoint, bc2P1, bc2P2, startNode;
 @synthesize mbc;
+@synthesize ViewImage;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -72,7 +73,7 @@
     NSColor* rgba;
     
     switch (self.mode) {
-        showResults:
+        case showResults:
             rgba = [NSColor whiteColor];
             break;
         default:
@@ -118,14 +119,18 @@
     NSColor* rgba;
     
     switch (self.mode) {
-        showResults:
-            rgba = [NSColor colorWithDeviceRed:0 green:0 blue:0 alpha:1];
-            for (Elements* e in [coreData allElements]) {
-                [self drawElement:e WithColor:rgba];
-            }
+       case showResults:
+        {
+            NSString* stringTMP = [NSString stringWithFormat:@"showResults\n"];
+            DLog(@"%@",stringTMP);
+        }
             break;
             
         default:
+        {
+            NSString* stringTMP = [NSString stringWithFormat:@"default\n"];
+            DLog(@"%@",stringTMP);
+        }
             rgba = [NSColor greenColor];
             for (Elements* e in [coreData allElements]) {
                 [self drawElement:e WithColor:rgba];
@@ -135,6 +140,22 @@
     
     
      
+}
+
+-(void) drawElemenysNOW{
+    NSImage *newImage;
+    bitmapData = CFDataCreateMutable(NULL, 0);
+    CFDataSetLength(bitmapData, self.bounds.size.width * self.bounds.size.height * 4);
+    for (Elements* e in [coreData allElements]) {
+        [self drawElementWithTemp:e];
+    }
+    newImage = [self createNSImageWithMesh];//(bitmapData, self.bounds.size.width, self.bounds.size.height);
+    CFRelease(bitmapData);
+    if (newImage !=nil){
+        [ViewImage setImage: newImage];
+    }
+
+    
 }
 
 -(void) drawElement:(Elements *)elem WithColor:(NSColor *)rgba{
@@ -158,102 +179,57 @@
             
             [rgba set];
             [path stroke];
-
+            
             break;
     }
     
     
-       
-    NSPoint minPoint = NSMakePoint(p1.x, p1.y);
-    NSPoint maxPoint = NSMakePoint(p1.x, p1.y);
-
-    switch (self.mode) {
-        case showResults:
-       
-            if (minPoint.x > p2.x) {
-                minPoint.x = p2.x;
-            }
-            if (minPoint.x > p3.x) {
-                minPoint.x = p3.x;
-            }
-
-            if (minPoint.y > p2.y) {
-                minPoint.y = p2.y;
-            }
-            if (minPoint.y > p3.y) {
-                minPoint.y = p3.y;
-            }
-            
-            if (maxPoint.x < p2.x) {
-                maxPoint.x = p2.x;
-            }
-            if (maxPoint.x < p3.x) {
-                maxPoint.x = p3.x;
-            }
-            
-            if (maxPoint.y < p2.y) {
-                maxPoint.y = p2.y;
-            }
-            if (maxPoint.y < p3.y) {
-                maxPoint.y = p3.y;
-            }
-            
-            for (int a = (int)minPoint.x; a <= (int)maxPoint.x; ++a) {
-                for (int b = (int)minPoint.y; b <= (int)maxPoint.y; ++b) {
-//                    {
-//                        NSString* stringTMP = [NSString stringWithFormat:@"drawTemp\n"];
-//                        DLog(@"%@",stringTMP);
-//                    }
-
-                    NSPoint tmpAB = NSMakePoint(a, b);
-//                    {
-//                        NSString* stringTMP = [NSString stringWithFormat:@"x: %f, y: %f\n", tmpAB.x, tmpAB.y];
-//                        DLog(@"%@",stringTMP);
-//                    }
-
-                    double tempAB = [elem getTempAtPoint:tmpAB];
-//                    {
-//                        NSString* stringTMP = [NSString stringWithFormat:@"temp %f\n",tempAB];
-//                        DLog(@"%@",stringTMP);
-//                    }
-
-                    if (tempAB != 0) {
-                        double tempValColor = ((tempAB-tempMin)/(tempMax-tempMin))*(240.0/360.0);
-                        {
-                            NSString* stringTMP = [NSString stringWithFormat:@"H %f\n", tempValColor];
-//                            if ((tempValColor >= 0.0 && tempValColor <=1.0)) {
-//                                DLog(@"%@",stringTMP);
-                                //                                [elem dlog];
-                                [self drawCirclePoint:tmpAB
-                                                    R:1
-                                            WithColor:[NSColor colorWithDeviceHue:tempValColor
-                                                                       saturation:1
-                                                                       brightness:1 
-                                                                            alpha:1]];
-                                
-//                            }
-                        }
-
-                        
-                        
-                    }
-                }
-            }
-
-            
-            break;
-            
-        default:
-            [[NSColor colorWithDeviceRed:(arc4random()%255)/255.0 
-                                   green:(arc4random()%255)/255.0  
-                                    blue:(arc4random()%255)/255.0 
-                                   alpha:0.2] setFill];
-            [path fill];
-            break;
-    }
+    
+    
+    [[NSColor colorWithDeviceRed:(arc4random()%255)/255.0 
+                           green:(arc4random()%255)/255.0  
+                            blue:(arc4random()%255)/255.0 
+                           alpha:0.2] setFill];
+    [path fill];
+    
    
     
     
+}
+
+-(void) drawElementWithTemp:(Elements *)elem{
+    UInt8* bitmap = CFDataGetMutableBytePtr(bitmapData);
+    NSPoint minInElem = [elem getMinValueOfXY];
+    NSPoint maxInElem = [elem getMaxValueOfXY];
+    
+    for (NSInteger x = minInElem.x-1; x <= maxInElem.x; ++x) {
+        for (NSInteger y = minInElem.y-1; y <= maxInElem.y; ++y) {
+            double tempXY = [elem getTempAtPoint:NSMakePoint(x, y)];
+            if (tempXY != 0) {
+                double tempValColor = 240.0/360.0+((tempXY-tempMin)/(tempMax-tempMin))*((360.0-240.0)/360.0);
+                NSColor* aColor = [NSColor colorWithDeviceHue:tempValColor
+                                                   saturation:1
+                                                   brightness:1 
+                                                        alpha:1];
+                int i = 4 * (x +15 + (self.bounds.size.height - y -20) * self.bounds.size.width);
+                bitmap[i] = [aColor redComponent] * 0xff;
+                bitmap[i+1] = [aColor greenComponent] * 0xff;
+                bitmap[i+2] = [aColor blueComponent] * 0xff;
+                bitmap[i+3] = [aColor alphaComponent] * 0xff;
+                
+            }
+        }
+    }
+}
+-(NSImage*) createNSImageWithMesh{
+    CGDataProviderRef dataProvider = CGDataProviderCreateWithCFData(bitmapData);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGImageRef imageRef = CGImageCreate(self.bounds.size.width, self.bounds.size.height, 8, 32, self.bounds.size.width * 4, colorSpace, kCGImageAlphaLast, dataProvider, NULL, 0, kCGRenderingIntentDefault);
+    NSImage *image = [[NSImage alloc] initWithCGImage:imageRef size:self.bounds.size];
+    CGDataProviderRelease(dataProvider);
+    CGColorSpaceRelease(colorSpace);
+    CGImageRelease(imageRef);
+    return image;
 }
 
 - (void) mouseDown:(NSEvent*)someEvent {
@@ -357,6 +333,8 @@
     
 }
 
-
+-(void) clean{
+    [ViewImage setImage: nil];
+}
 
 @end

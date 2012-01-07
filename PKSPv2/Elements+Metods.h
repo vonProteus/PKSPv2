@@ -19,5 +19,7 @@
                    andK:(double)k;
 -(double) getTempAtPoint:(NSPoint)p;
 -(BOOL) pointIsInPolyhon:(NSPoint)p;
+-(NSPoint) getMinValueOfXY;
+-(NSPoint) getMaxValueOfXY;
 
 @end
