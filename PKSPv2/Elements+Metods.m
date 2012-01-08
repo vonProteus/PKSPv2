@@ -211,5 +211,51 @@
     
 }
 
+-(struct Si) getS:(Nodes*)n{
+    NSInteger i = [self getLocalNumberForNode:n];
+    NSPoint p1 = [self.n1 pointValue];
+    NSPoint p2 = [self.n2 pointValue];
+    NSPoint p3 = [self.n3 pointValue];
+    struct Si toRetuen;
+    toRetuen.A = 0;
+    toRetuen.B = 0;
+    toRetuen.C = 0;
+    switch (i) {
+        case 1:
+            toRetuen.A = p3.x-p2.x;
+            toRetuen.B = p2.y-p3.y;
+            toRetuen.C = p2.x*p3.y - p3.x*p2.y;
+            break;
+        case 2:
+            toRetuen.A = p1.x-p3.x;
+            toRetuen.B = p3.y-p1.y;
+            toRetuen.C = p3.x*p1.y - p1.x*p3.y;
+            break;
+        case 3:
+            toRetuen.A = p2.x-p1.x;
+            toRetuen.B = p1.y-p2.y;
+            toRetuen.C = p1.x*p2.y - p2.x*p1.y;
+            break;
+            
+        default:
+            DLog(@"error: nod nie w elem\n");
+            break;
+    }    
+    return toRetuen;
+}
+
+-(NSInteger) getLocalNumberForNode:(Nodes *)n{
+    if (self.n1.number == n.number) {
+        return 1;
+    }
+    if (self.n2.number == n.number) {
+        return 2;
+    }
+    if (self.n3.number == n.number) {
+        return 3;
+    }
+    return 0;
+}
+
 
 @end

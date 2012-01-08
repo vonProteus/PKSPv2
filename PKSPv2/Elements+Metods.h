@@ -9,6 +9,13 @@
 #import "Elements.h"
 @class GlobalMatrix;
 
+struct Si
+{
+    double A;
+    double B;
+    double C;
+};
+
 @interface Elements (Metods)
 -(void) dlog;
 -(double) detForMatrixFromPoint1:(Nodes*) matrixPoint1
@@ -21,5 +28,8 @@
 -(BOOL) pointIsInPolyhon:(NSPoint)p;
 -(NSPoint) getMinValueOfXY;
 -(NSPoint) getMaxValueOfXY;
+
+-(struct Si) getS:(Nodes*)n;
+-(NSInteger) getLocalNumberForNode:(Nodes*)n;
 
 @end
