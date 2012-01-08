@@ -12,6 +12,7 @@
 
 @interface Solver : NSObject{
     GlobalMatrix* matrix;
+    CDModel* coreDara;
 }
 -(id) initWirhCDData;
 -(void) addBC1ForNode:(NSUInteger)node 
