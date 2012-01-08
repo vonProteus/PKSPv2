@@ -62,11 +62,17 @@
             NSString* stringTMP = [NSString stringWithFormat:@"max %f min %f\n", tempMax, tempMin];
             DLog(@"%@",stringTMP);
         }
-
+        
     }
     
-    [self drawNodes];
     [self drawElemenys];
+    [self drawNodes];
+    
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"end\n"];
+        DLog(@"%@",stringTMP);
+    }
+
 }
 
 - (void)drawNodes{
@@ -98,7 +104,7 @@
                   Y: (double)y 
                   R: (double)r
           WithColor:(NSColor *)rgba{
-    //    DLog(@"ok");
+//    DLog(@"ok");
     NSRect rect = NSMakeRect(x-r, y-r, 2*r, 2*r);
     NSBezierPath* path = [NSBezierPath bezierPath];
     [path appendBezierPathWithOvalInRect:rect];
@@ -143,6 +149,30 @@
 }
 
 -(void) drawElemenysNOW{
+    DLog(@"start\n");
+    
+    if (self.mode == showResults) {
+        tempMax = DBL_MIN;
+        tempMin = DBL_MAX;
+        
+        for (Nodes* n in [coreData allNodes]) {
+            if ([n.temp doubleValue] == 0) {
+                continue;
+            }
+            if ([n.temp doubleValue] > tempMax) {
+                tempMax = [n.temp doubleValue];
+            }
+            if ([n.temp doubleValue] < tempMin) {
+                tempMin = [n.temp doubleValue];
+            }
+        }
+        {
+            NSString* stringTMP = [NSString stringWithFormat:@"max %f min %f\n", tempMax, tempMin];
+            DLog(@"%@",stringTMP);
+        }
+        
+    }
+
     NSImage *newImage;
     bitmapData = CFDataCreateMutable(NULL, 0);
     CFDataSetLength(bitmapData, self.bounds.size.width * self.bounds.size.height * 4);
@@ -154,6 +184,7 @@
     if (newImage !=nil){
         [ViewImage setImage: newImage];
     }
+    DLog(@"end\n");
 
     
 }
@@ -207,6 +238,11 @@
             double tempXY = [elem getTempAtPoint:NSMakePoint(x, y)];
             if (tempXY != 0) {
                 double tempValColor = 240.0/360.0+((tempXY-tempMin)/(tempMax-tempMin))*((360.0-240.0)/360.0);
+//                {
+//                    NSString* stringTMP = [NSString stringWithFormat:@"tempValColor: %f tempXY: %f\n", tempValColor, tempXY];
+//                    DLog(@"%@",stringTMP);
+//                }
+
                 NSColor* aColor = [NSColor colorWithDeviceHue:tempValColor
                                                    saturation:1
                                                    brightness:1 

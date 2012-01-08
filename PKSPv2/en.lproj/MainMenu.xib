@@ -18,12 +18,12 @@
 			<string>NSMenu</string>
 			<string>NSTextFieldCell</string>
 			<string>NSButtonCell</string>
-			<string>NSButton</string>
 			<string>NSToolbarSpaceItem</string>
-			<string>NSProgressIndicator</string>
-			<string>NSToolbarSeparatorItem</string>
+			<string>NSButton</string>
 			<string>NSImageView</string>
+			<string>NSToolbarSeparatorItem</string>
 			<string>NSImageCell</string>
+			<string>NSProgressIndicator</string>
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
 			<string>NSView</string>
@@ -679,7 +679,7 @@
 						<reference ref="737414495"/>
 						<reference ref="743510309"/>
 					</array>
-					<array class="NSMutableArray" key="NSToolbarIBDefaultItems">
+					<array key="NSToolbarIBDefaultItems">
 						<reference ref="164780607"/>
 						<reference ref="89413355"/>
 						<reference ref="837464219"/>
@@ -697,29 +697,6 @@
 					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
-						<object class="NSProgressIndicator" id="370194103">
-							<reference key="NSNextResponder" ref="439893737"/>
-							<int key="NSvFlags">1325</int>
-							<object class="NSPSMatrix" key="NSDrawMatrix"/>
-							<string key="NSFrame">{{224, 164}, {32, 32}}</string>
-							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
-							<bool key="NSViewCanDrawConcurrently">YES</bool>
-							<string key="NSReuseIdentifierKey">_NS:3891</string>
-							<int key="NSpiFlags">28682</int>
-							<double key="NSMaxValue">100</double>
-						</object>
-						<object class="NSCustomView" id="515177624">
-							<reference key="NSNextResponder" ref="439893737"/>
-							<int key="NSvFlags">274</int>
-							<string key="NSFrameSize">{480, 360}</string>
-							<reference key="NSSuperview" ref="439893737"/>
-							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="370194103"/>
-							<string key="NSReuseIdentifierKey">_NS:1192</string>
-							<string key="NSClassName">MainView</string>
-						</object>
 						<object class="NSImageView" id="673678223">
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">274</int>
@@ -734,7 +711,7 @@
 							<string key="NSFrameSize">{480, 360}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="515177624"/>
+							<reference key="NSNextKeyView" ref="370194103"/>
 							<string key="NSReuseIdentifierKey">_NS:2141</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="697712371">
@@ -748,11 +725,34 @@
 							</object>
 							<bool key="NSEditable">YES</bool>
 						</object>
+						<object class="NSCustomView" id="515177624">
+							<reference key="NSNextResponder" ref="439893737"/>
+							<int key="NSvFlags">274</int>
+							<string key="NSFrameSize">{480, 360}</string>
+							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView" ref="673678223"/>
+							<string key="NSReuseIdentifierKey">_NS:1192</string>
+							<string key="NSClassName">MainView</string>
+						</object>
+						<object class="NSProgressIndicator" id="370194103">
+							<reference key="NSNextResponder" ref="439893737"/>
+							<int key="NSvFlags">1325</int>
+							<object class="NSPSMatrix" key="NSDrawMatrix"/>
+							<string key="NSFrame">{{224, 164}, {32, 32}}</string>
+							<reference key="NSSuperview" ref="439893737"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
+							<bool key="NSViewCanDrawConcurrently">YES</bool>
+							<string key="NSReuseIdentifierKey">_NS:3891</string>
+							<int key="NSpiFlags">28682</int>
+							<double key="NSMaxValue">100</double>
+						</object>
 					</array>
 					<string key="NSFrameSize">{480, 360}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView" ref="673678223"/>
+					<reference key="NSNextKeyView" ref="515177624"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 900}}</string>
 				<string key="NSMinSize">{480, 438}</string>
@@ -1137,7 +1137,7 @@
 				<string key="NSWindowContentMaxSize">{480, 270}</string>
 				<string key="NSWindowContentMinSize">{480, 270}</string>
 				<object class="NSView" key="NSWindowView" id="207110971">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSTextField" id="994670185">
@@ -1730,7 +1730,6 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{532, 270}</string>
-					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="638531321"/>
 					<string key="NSReuseIdentifierKey">_NS:216</string>
 				</object>
@@ -1875,14 +1874,6 @@
 						<reference key="destination" ref="746497620"/>
 					</object>
 					<int key="connectionID">563</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">progres</string>
-						<reference key="source" ref="392905151"/>
-						<reference key="destination" ref="370194103"/>
-					</object>
-					<int key="connectionID">574</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -2158,6 +2149,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">progres</string>
+						<reference key="source" ref="392905151"/>
+						<reference key="destination" ref="370194103"/>
+					</object>
+					<int key="connectionID">574</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">ViewImage</string>
 						<reference key="source" ref="515177624"/>
 						<reference key="destination" ref="673678223"/>
@@ -2306,9 +2305,9 @@
 						<int key="objectID">372</int>
 						<reference key="object" ref="439893737"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="370194103"/>
 							<reference ref="673678223"/>
 							<reference ref="515177624"/>
+							<reference ref="370194103"/>
 						</array>
 						<reference key="parent" ref="972006081"/>
 					</object>
@@ -2447,11 +2446,6 @@
 							<reference ref="853901869"/>
 						</array>
 						<reference key="parent" ref="791955386"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">573</int>
-						<reference key="object" ref="370194103"/>
-						<reference key="parent" ref="439893737"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">580</int>
@@ -3046,6 +3040,12 @@
 						<reference key="parent" ref="797569485"/>
 					</object>
 					<object class="IBObjectRecord">
+						<int key="objectID">743</int>
+						<reference key="object" ref="515177624"/>
+						<array class="NSMutableArray" key="children"/>
+						<reference key="parent" ref="439893737"/>
+					</object>
+					<object class="IBObjectRecord">
 						<int key="objectID">738</int>
 						<reference key="object" ref="673678223"/>
 						<array class="NSMutableArray" key="children">
@@ -3059,8 +3059,8 @@
 						<reference key="parent" ref="673678223"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">743</int>
-						<reference key="object" ref="515177624"/>
+						<int key="objectID">573</int>
+						<reference key="object" ref="370194103"/>
 						<reference key="parent" ref="439893737"/>
 					</object>
 				</array>
@@ -3226,7 +3226,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">745</int>
+			<int key="maxID">747</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

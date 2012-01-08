@@ -246,6 +246,7 @@ void outVect(double *Vect, NSInteger n){
     NSMutableArray* line = [H objectAtIndex:lineName];
     
     NSInteger lsName = [self realLeftSite];
+    val += [[line objectAtIndex:lineName] doubleValue];
     [line replaceObjectAtIndex:lsName withObject:[NSNumber numberWithDouble:val]];
 }
 
