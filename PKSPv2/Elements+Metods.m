@@ -95,35 +95,7 @@
 -(double) getTempAtPoint:(NSPoint)p{
     double result = 0;
     if ([self pointIsInPolyhon:p]) {
-        NSPoint i = [self.n1 pointValue];
-        NSPoint j = [self.n2 pointValue];
-        NSPoint k = [self.n3 pointValue];
-//        
-//        double ai = j.x*k.y - k.x*j.y;
-//        double bi = j.y - k.y;
-//        double ci = k.x - j.x;
-//        
-//        double aj = k.x*i.y - k.x*i.y;
-//        double bj = k.y - i.y;
-//        double cj = i.x - k.x;
-//        
-//        double ak = i.x*j.y - i.x*j.y;
-//        double bk = i.y - j.y;
-//        double ck = j.x - i.x;
-//        
-//        double a2 = j.x*k.y + i.x*j.y + k.x*i.y - j.x*i.y - k.x*j.y - i.x*k.y;
-//        
-//        double Ni = (1/a2)*(ai + bi*p.x + ci*p.y);
-//        double Nj = (1/a2)*(aj + bj*p.x + cj*p.y);
-//        double Nk = (1/a2)*(ak + bk*p.x + ck*p.y);
-//        
-//        if (Ni+Nj+Nk != 1) {
-//            {
-//                NSString* stringTMP = [NSString stringWithFormat:@"error suma = %f\n",Ni+Nj+Nk];
-//                DLog(@"%@",stringTMP);
-//            }
-//
-//        }
+
         CDModel* coreData = [CDModel sharedModel];
         Nodes *tmpNode = [coreData addNewNode];
         tmpNode.x = [NSNumber numberWithDouble:p.x];
@@ -148,13 +120,6 @@
         double Nj = Sj/Sd;
         double Nk = Sk/Sd;
         
-//        if (Ni+Nj+Nk != 1) {
-//            {
-//                NSString* stringTMP = [NSString stringWithFormat:@"error suma = %f\n",Ni+Nj+Nk];
-//                DLog(@"%@",stringTMP);
-//            }
-//
-//        }
         [coreData removeCDObiect:tmpNode];
         result = [self.n1.temp doubleValue]*Ni + [self.n2.temp doubleValue]*Nj + [self.n3.temp doubleValue]*Nk;
         
