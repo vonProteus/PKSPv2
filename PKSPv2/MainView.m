@@ -247,7 +247,9 @@
                                                    saturation:1
                                                    brightness:1 
                                                         alpha:1];
-                int i = 4 * (x +15 + (self.bounds.size.height - y -20) * self.bounds.size.width);
+//                int i = 4 * (x +15 + (self.bounds.size.height - y -20) * self.bounds.size.width);
+                int i = 4 * (x + (self.bounds.size.height - y) * self.bounds.size.width);
+
                 bitmap[i] = [aColor redComponent] * 0xff;
                 bitmap[i+1] = [aColor greenComponent] * 0xff;
                 bitmap[i+2] = [aColor blueComponent] * 0xff;
