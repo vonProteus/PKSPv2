@@ -87,4 +87,9 @@ typedef enum AppState {
 -(void) bc2P1:(NSPoint)p1 
            P2:(NSPoint)p2;
 
+
+@property (retain) IBOutlet NSWindow* showResultsWindow;
+@property (retain) IBOutlet NSTextField* tempShowResultsTextField;
+-(void) showTemperatureAtPoint:(NSPoint)p;
+
 @end

@@ -24,7 +24,7 @@ typedef enum MainViewMode {
     double tempMin;
     CFMutableDataRef bitmapData;
 }
-@property (nonatomic, retain) MenuBarController* mbc;
+@property (nonatomic, retain) IBOutlet MenuBarController* mbc;
 @property (assign) NSPoint lastPoint, bc2P1, bc2P2, startNode;
 @property (nonatomic, readwrite) MainViewMode mode;
 @property (assign) double rOfNode;

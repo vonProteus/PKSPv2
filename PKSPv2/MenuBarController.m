@@ -33,6 +33,8 @@
 @synthesize rOfNodeTextField;
 @synthesize maxLenghtOfEadgeTextField;
 @synthesize kValueTextField;
+@synthesize tempShowResultsTextField;
+@synthesize showResultsWindow;
 
 -(id) init{
     {
@@ -314,6 +316,25 @@
 //    [self.mainView display];
     [self.mainView drawElemenysNOW];
     [self.progres stopAnimation:nil];
+}
+
+-(void) showTemperatureAtPoint:(NSPoint)p{
+
+
+    double temp = 0;
+    BOOL display = NO;
+    for (Elements* elem in [coreData allElements]) {
+        if ([elem getTempAtPoint:p] != 0) {
+            temp = [elem getTempAtPoint:p];
+            display = YES;
+            break;
+        }
+    }
+    if (display) {
+        [self.showResultsWindow setIsVisible:YES];
+        [self.tempShowResultsTextField setStringValue:[[NSNumber numberWithDouble:temp] stringValue]];
+    }
+    
 }
 
 @end

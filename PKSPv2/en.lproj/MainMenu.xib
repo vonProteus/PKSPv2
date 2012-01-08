@@ -754,7 +754,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="515177624"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 900}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{480, 438}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">PKSPv2</string>
@@ -780,7 +780,7 @@
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="974160581">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSTextField" id="638162028">
@@ -935,10 +935,11 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{241, 154}</string>
+					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="638162028"/>
 					<string key="NSReuseIdentifierKey">_NS:197</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 900}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">BC1</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -953,7 +954,7 @@
 				<nil key="NSViewClass"/>
 				<nil key="NSUserInterfaceItemIdentifier"/>
 				<object class="NSView" key="NSWindowView" id="938840225">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSTextField" id="725403931">
@@ -1100,10 +1101,11 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{241, 181}</string>
+					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="725403931"/>
 					<string key="NSReuseIdentifierKey">_NS:197</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 900}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">BC2</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
@@ -1137,7 +1139,7 @@
 				<string key="NSWindowContentMaxSize">{480, 270}</string>
 				<string key="NSWindowContentMinSize">{480, 270}</string>
 				<object class="NSView" key="NSWindowView" id="207110971">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<array class="NSMutableArray" key="NSSubviews">
 						<object class="NSTextField" id="994670185">
@@ -1730,10 +1732,11 @@
 						</object>
 					</array>
 					<string key="NSFrameSize">{532, 270}</string>
+					<reference key="NSSuperview"/>
 					<reference key="NSNextKeyView" ref="638531321"/>
 					<string key="NSReuseIdentifierKey">_NS:216</string>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 900}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{480, 292}</string>
 				<string key="NSMaxSize">{480, 292}</string>
 				<string key="NSFrameAutosaveName">Preferences</string>
@@ -1759,6 +1762,53 @@
 				<int key="NSMnemonicLoc">2147483647</int>
 				<reference key="NSOnImage" ref="35465992"/>
 				<reference key="NSMixedImage" ref="502551668"/>
+			</object>
+			<object class="NSWindowTemplate" id="419365413">
+				<int key="NSWindowStyleMask">8223</int>
+				<int key="NSWindowBacking">2</int>
+				<string key="NSWindowRect">{{131, 159}, {144, 62}}</string>
+				<int key="NSWTFlags">1685586944</int>
+				<string key="NSWindowTitle">Temperature</string>
+				<string key="NSWindowClass">NSPanel</string>
+				<nil key="NSViewClass"/>
+				<nil key="NSUserInterfaceItemIdentifier"/>
+				<object class="NSView" key="NSWindowView" id="526427959">
+					<reference key="NSNextResponder"/>
+					<int key="NSvFlags">256</int>
+					<array class="NSMutableArray" key="NSSubviews">
+						<object class="NSTextField" id="83622810">
+							<reference key="NSNextResponder" ref="526427959"/>
+							<int key="NSvFlags">268</int>
+							<string key="NSFrame">{{20, 20}, {104, 22}}</string>
+							<reference key="NSSuperview" ref="526427959"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
+							<string key="NSReuseIdentifierKey">_NS:903</string>
+							<bool key="NSEnabled">YES</bool>
+							<object class="NSTextFieldCell" key="NSCell" id="433163359">
+								<int key="NSCellFlags">-1267597759</int>
+								<int key="NSCellFlags2">272630784</int>
+								<string key="NSContents"/>
+								<reference key="NSSupport" ref="146536592"/>
+								<string key="NSCellIdentifier">_NS:903</string>
+								<reference key="NSControlView" ref="83622810"/>
+								<bool key="NSDrawsBackground">YES</bool>
+								<int key="NSTextBezelStyle">1</int>
+								<reference key="NSBackgroundColor" ref="583211674"/>
+								<reference key="NSTextColor" ref="472397025"/>
+							</object>
+						</object>
+					</array>
+					<string key="NSFrameSize">{144, 62}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
+					<reference key="NSNextKeyView"/>
+					<string key="NSReuseIdentifierKey">_NS:197</string>
+				</object>
+				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
+				<string key="NSFrameAutosaveName">tempShowResultsTextField</string>
+				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -2157,11 +2207,35 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">showResultsWindow</string>
+						<reference key="source" ref="392905151"/>
+						<reference key="destination" ref="419365413"/>
+					</object>
+					<int key="connectionID">754</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">tempShowResultsTextField</string>
+						<reference key="source" ref="392905151"/>
+						<reference key="destination" ref="83622810"/>
+					</object>
+					<int key="connectionID">755</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">ViewImage</string>
 						<reference key="source" ref="515177624"/>
 						<reference key="destination" ref="673678223"/>
 					</object>
 					<int key="connectionID">744</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">mbc</string>
+						<reference key="source" ref="515177624"/>
+						<reference key="destination" ref="392905151"/>
+					</object>
+					<int key="connectionID">756</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -3063,6 +3137,35 @@
 						<reference key="object" ref="370194103"/>
 						<reference key="parent" ref="439893737"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">748</int>
+						<reference key="object" ref="419365413"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="526427959"/>
+						</array>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">749</int>
+						<reference key="object" ref="526427959"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="83622810"/>
+						</array>
+						<reference key="parent" ref="419365413"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">750</int>
+						<reference key="object" ref="83622810"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="433163359"/>
+						</array>
+						<reference key="parent" ref="526427959"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">751</int>
+						<reference key="object" ref="433163359"/>
+						<reference key="parent" ref="83622810"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -3221,12 +3324,17 @@
 				<string key="738.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="739.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="743.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="748.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<boolean value="NO" key="748.NSWindowTemplate.visibleAtLaunch"/>
+				<string key="749.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="750.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="751.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">747</int>
+			<int key="maxID">756</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -3263,17 +3371,20 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">MainView</string>
 					<string key="superclassName">NSView</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">ViewImage</string>
-						<string key="NS.object.0">NSImageView</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">ViewImage</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="ViewImage">NSImageView</string>
+						<string key="mbc">MenuBarController</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="ViewImage">
 							<string key="name">ViewImage</string>
 							<string key="candidateClassName">NSImageView</string>
 						</object>
-					</object>
+						<object class="IBToOneOutletInfo" key="mbc">
+							<string key="name">mbc</string>
+							<string key="candidateClassName">MenuBarController</string>
+						</object>
+					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/MainView.h</string>
@@ -3390,8 +3501,10 @@
 						<string key="progres">NSProgressIndicator</string>
 						<string key="qValueBC2TextField">NSTextField</string>
 						<string key="rOfNodeTextField">NSTextField</string>
+						<string key="showResultsWindow">NSWindow</string>
 						<string key="solverItem">NSMenuItem</string>
 						<string key="spaceBetwenNodesOnEadgeTextField">NSTextField</string>
+						<string key="tempShowResultsTextField">NSTextField</string>
 						<string key="temperatureValueBC1TextField">NSTextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -3467,12 +3580,20 @@
 							<string key="name">rOfNodeTextField</string>
 							<string key="candidateClassName">NSTextField</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="showResultsWindow">
+							<string key="name">showResultsWindow</string>
+							<string key="candidateClassName">NSWindow</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="solverItem">
 							<string key="name">solverItem</string>
 							<string key="candidateClassName">NSMenuItem</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="spaceBetwenNodesOnEadgeTextField">
 							<string key="name">spaceBetwenNodesOnEadgeTextField</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tempShowResultsTextField">
+							<string key="name">tempShowResultsTextField</string>
 							<string key="candidateClassName">NSTextField</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="temperatureValueBC1TextField">

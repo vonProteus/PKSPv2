@@ -320,7 +320,9 @@
             bc2P1 = location;
         }
             break;
-            
+        case showResults:
+            [mbc showTemperatureAtPoint:location];
+            break;
         default:
             break;
     }
