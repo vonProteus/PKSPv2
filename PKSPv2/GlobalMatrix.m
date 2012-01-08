@@ -239,6 +239,17 @@ void outVect(double *Vect, NSInteger n){
     
 }
 
+-(void) addBC2ForNodeNumber:(NSUInteger)nodeNumber 
+                     andVal:(double)val{
+    NSUInteger lineName = [self convertNodeNumberToRealY:nodeNumber];
+    
+    NSMutableArray* line = [H objectAtIndex:lineName];
+    
+    NSInteger lsName = [self realLeftSite];
+    [line replaceObjectAtIndex:lsName withObject:[NSNumber numberWithDouble:val]];
+}
+
+
 -(NSUInteger) realLeftSite{
     return [[HXNames valueForKey:@"LeftSite"] integerValue];
 }

@@ -29,6 +29,9 @@
 - (void) addBC2ForNodeNumber1:(NSUInteger)nodeNumber1 
                andNodeNumber2:(NSUInteger)nodeNumber2 
                       andVal:(double)val;
+
+- (void) addBC2ForNodeNumber:(NSUInteger)nodeNumber 
+                      andVal:(double)val;
 //
 //- (void) gaussTempV:(MyVector*)tempVec 
 //              andPV:(MyVector*)PVec;
