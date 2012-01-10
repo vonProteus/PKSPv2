@@ -625,6 +625,7 @@
 				GCC_PREFIX_HEADER = "PKSPv2/PKSPv2-Prefix.pch";
 				INFOPLIST_FILE = "PKSPv2/PKSPv2-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -636,6 +637,7 @@
 				GCC_PREFIX_HEADER = "PKSPv2/PKSPv2-Prefix.pch";
 				INFOPLIST_FILE = "PKSPv2/PKSPv2-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
