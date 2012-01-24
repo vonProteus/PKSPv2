@@ -16,6 +16,7 @@
 @synthesize lastPoint, bc2P1, bc2P2, startNode;
 @synthesize mbc;
 @synthesize ViewImage;
+@synthesize imageSolv;
 
 - (id)initWithFrame:(NSRect)frame
 {
@@ -183,6 +184,7 @@
     CFRelease(bitmapData);
     if (newImage !=nil){
         [ViewImage setImage: newImage];
+        self.imageSolv = newImage;
     }
     DLog(@"end\n");
 
@@ -237,7 +239,7 @@
         for (NSInteger y = minInElem.y-1; y <= maxInElem.y; ++y) {
             double tempXY = [elem getTempAtPoint:NSMakePoint(x, y)];
             if (tempXY != 0) {
-                double tempValColor = 240.0/360.0+((tempXY-tempMin)/(tempMax-tempMin))*((360.0-240.0)/360.0);
+                double tempValColor = 90.0/360.0 - ((tempXY-tempMin)/(tempMax-tempMin))*(90.0/360.0);
 //                {
 //                    NSString* stringTMP = [NSString stringWithFormat:@"tempValColor: %f tempXY: %f\n", tempValColor, tempXY];
 //                    DLog(@"%@",stringTMP);

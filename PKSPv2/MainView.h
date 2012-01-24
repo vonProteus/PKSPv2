@@ -28,6 +28,7 @@ typedef enum MainViewMode {
 @property (assign) NSPoint lastPoint, bc2P1, bc2P2, startNode;
 @property (nonatomic, readwrite) MainViewMode mode;
 @property (assign) double rOfNode;
+@property (nonatomic, strong) NSImage* imageSolv;
 
 - (void)drawNodes;
 - (void)drawElemenys;

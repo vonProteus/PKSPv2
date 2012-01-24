@@ -32,7 +32,14 @@
 }
 
 -(void) solve{
+    {
+        NSString* stringTMP = [NSString stringWithFormat:@"real lefr site :%ld\n", [matrix realLeftSite]];
+        DLog(@"%@",stringTMP);
+    }
+
+    DLog(@"test: start gaus\n");
     [matrix gauss3];
+    DLog(@"test: stop gaus\n");
 }
 
 -(void) dlogMatrix{

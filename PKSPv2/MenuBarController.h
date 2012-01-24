@@ -92,4 +92,7 @@ typedef enum AppState {
 @property (retain) IBOutlet NSTextField* tempShowResultsTextField;
 -(void) showTemperatureAtPoint:(NSPoint)p;
 
+
+
+-(IBAction)savePNG:(id)sender;
 @end
